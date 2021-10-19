@@ -11,6 +11,8 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
+    user = db.relationship("User", back_populates="reviews")
+    product = db.relationship("Product", back_populates="reviews")
 
 
 

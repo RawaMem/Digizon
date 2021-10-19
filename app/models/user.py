@@ -16,6 +16,16 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
+    orders = db.relationship('Order', back_populates='user')
+    reviews = db.relationship('Review', back_populates='user')
+    cart = db.relationship('Cart', uselist=False, backref='user')
+    products = db.relationship('Product', back_populates='user')
+    view_history = db.relationship('ViewHistory', uselist=False, backref='user')
+    medias = db.relationship('Media', back_populates='user')
+    save = db.relationship('Save', uselist=False, backref='user')
+
+
+
     @property
     def password(self):
         return self.hashed_password

@@ -1,5 +1,8 @@
 from .db import db
 from datetime import datetime
+from .cart import products_carts
+
+
 
 
 class Product(db.Model):
@@ -15,6 +18,10 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
 
+    user = db.relationship("User", back_populates="products")
+    reviews = db.relationship("Review", back_populates="product")
+    order = db.relationship("Order", back_populates="products")
+    carts = db.relationship("Cart", secondary=products_carts, back_populates="products")
 
 
 
