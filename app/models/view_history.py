@@ -19,7 +19,7 @@ class ViewHistory(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    user = db.relationship('User', uselist=False, backref='view_history')
+    user = db.relationship('User', uselist=False, back_populates='view_history')
     products = db.relationship("Product", secondary=products_histories, back_populates="view_histories")
 
 

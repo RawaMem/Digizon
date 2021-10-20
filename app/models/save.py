@@ -10,7 +10,7 @@ class Save(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    user = db.relationship('User', uselist=False, backref='save')
+    user = db.relationship('User', uselist=False, back_populates='save')
     products = db.relationship("Product", back_populates="save")
 
 
