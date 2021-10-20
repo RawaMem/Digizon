@@ -3,6 +3,7 @@ from app.models import db, Product
 from flask_login import current_user
 from app.forms.new_product_form import NewProductForm
 from app.forms.edit_product_form import EditProductForm
+from app.aws import upload_file_to_s3, allowed_file, get_unique_filename
 
 product_routes = Blueprint('products', __name__, url_prefix='/products')
 
