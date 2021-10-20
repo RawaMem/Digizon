@@ -42,6 +42,7 @@ class Product(db.Model):
             'description': self.description,
             'price': self.price,
             'stock_quantity': self.stock_quantity,
+            'medias': [media for media in self.medias],
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
