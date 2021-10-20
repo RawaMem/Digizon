@@ -30,7 +30,7 @@ class Order(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             # 'product_id': self.product_id,
-            # 'quantity': self.quantity,
+            # 'quantity': self.quantity
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
