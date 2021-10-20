@@ -19,11 +19,11 @@ class User(db.Model, UserMixin):
 
     orders = db.relationship('Order', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
-    cart = db.relationship('Cart', uselist=False, backref='user')
+    cart = db.relationship('Cart', uselist=False, back_populates='user')
     products = db.relationship('Product', back_populates='user')
-    view_history = db.relationship('ViewHistory', uselist=False, backref='user')
+    view_history = db.relationship('ViewHistory', uselist=False, back_populates='user')
     medias = db.relationship('Media', back_populates='user')
-    save = db.relationship('Save', uselist=False, backref='user')
+    save = db.relationship('Save', uselist=False, back_populates='user')
 
 
 

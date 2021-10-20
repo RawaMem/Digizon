@@ -19,7 +19,7 @@ class Cart(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    user = db.relationship('User', uselist=False, backref='cart')
+    user = db.relationship('User', uselist=False, back_populates='cart')
     products = db.relationship("Product", secondary=products_carts, back_populates="carts")
 
 
