@@ -13,6 +13,8 @@ class Media(db.Model):
 
 
     user = db.relationship('User', back_populates='medias')
+    product = db.relationship("Product", back_populates="medias")
+
 
 
 

@@ -1,6 +1,7 @@
 from .db import db
 from datetime import datetime
 from .cart import products_carts
+from .view_history import products_histories
 
 
 
@@ -22,6 +23,12 @@ class Product(db.Model):
     reviews = db.relationship("Review", back_populates="product")
     order = db.relationship("Order", back_populates="products")
     carts = db.relationship("Cart", secondary=products_carts, back_populates="products")
+    view_histories = db.relationship("ViewHistory", secondary=products_histories, back_populates="products")
+    medias = db.relationship("Media", back_populates="product")
+    save = db.relationship("Save", back_populates="products")
+
+
+
 
 
 

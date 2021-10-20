@@ -1,6 +1,15 @@
 from .db import db
 from datetime import datetime
 
+
+products_histories = db.Table(
+    "products_histories",
+    db.Column("product_id", db.Integer, db.ForeignKey("products.id"), primary_key=True),
+    db.Column("view_history_id", db.Integer, db.ForeignKey("view_histories.id"), primary_key=True)
+)
+
+
+
 class ViewHistory(db.Model):
     __tablename__ = 'view_histories'
 
@@ -11,6 +20,9 @@ class ViewHistory(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', uselist=False, backref='view_history')
+    products = db.relationship("Product", secondary=products_histories, back_populates="view_histories")
+
+
 
 
 

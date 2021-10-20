@@ -11,6 +11,8 @@ class Save(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', uselist=False, backref='save')
+    products = db.relationship("Product", back_populates="save")
+
 
 
 

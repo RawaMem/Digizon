@@ -4,7 +4,7 @@ from datetime import datetime
 
 products_carts = db.Table(
     "products_carts",
-    db.Column("product_id", db.Integer, db.ForeignKey("productss.id"), primary_key=True),
+    db.Column("product_id", db.Integer, db.ForeignKey("products.id"), primary_key=True),
     db.Column("cart_id", db.Integer, db.ForeignKey("carts.id"), primary_key=True)
 )
 
@@ -21,14 +21,6 @@ class Cart(db.Model):
 
     user = db.relationship('User', uselist=False, backref='cart')
     products = db.relationship("Product", secondary=products_carts, back_populates="carts")
-
-
-
-
-
-
-
-
 
 
 
