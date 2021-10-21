@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import { Home } from './components/Home';
+import { Profile } from './components/Profile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -40,6 +41,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile/:profileId' exact={true} >
+          <Profile />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
