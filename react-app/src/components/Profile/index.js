@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getAllProducts } from '../../store/products';
+import { Modal } from '../Modal';
 // import './index.css'
 
 
 
+
 export const Profile = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
+
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
 
@@ -25,6 +30,13 @@ export const Profile = () => {
 
     return (
         <div className='profile-page-container'>
+            <div className="create-product-btn-container">
+                <button onClick={() => setModalIsOpen(true)}>Sell Product</button>
+                <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
+                    This is where the form will be
+                </Modal>
+            </div>
+
             <div className="user-listed-products">
             {user?.products?.map(product => {
                     return (
