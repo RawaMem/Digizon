@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getAllProducts } from '../../store/products';
+import { createProduct, getAllProducts } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
 
@@ -15,9 +15,9 @@ export const Profile = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [stock_quantity, setStock_quantity] = useState('');
-    const [image1, setImage1] = useState('');
-    const [image2, setImage2] = useState('');
-    const [image3, setImage3] = useState('');
+    const [image, setImage] = useState([]);
+    // const [image2, setImage2] = useState('');
+    // const [image3, setImage3] = useState('');
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
@@ -37,8 +37,16 @@ export const Profile = () => {
             name,
             description,
             price,
-            stock_quantity
+            stock_quantity,
+            image,
+            // image2,
+            // image3
         };
+
+        let createdProduct = await dispatch(createProduct(payload))
+
+
+        setModalIsOpen(false)
     }
 
 
@@ -81,25 +89,32 @@ export const Profile = () => {
                                 value={stock_quantity}
                                 onChange={e => setStock_quantity(e.target.value)}
                                 />
+                                <label for="image1">Main Image</label>
                                 <input
                                 type="file"
+                                id='image1'
                                 placeholder="Main Image"
                                 required
-                                value={image1}
-                                onChange={e => setImage1(e.target.value)}
+                                value={image}
+                                onChange={e => setImage(image.push(e.target.value))}
                                 />
+                                <label for="image2">1st Optional Image</label>
                                 <input
                                 type="file"
-                                placeholder="1st Additional Image"
-                                value={image2}
-                                onChange={e => setImage2(e.target.value)}
+                                id='image2'
+                                placeholder="1st Optional Image"
+                                value={image}
+                                onChange={e => setImage(image.push(e.target.value))}
                                 />
+                                <label for="image1">2nd Optional Image</label>
                                 <input
                                 type="file"
-                                placeholder="2nd Additional Image"
-                                value={image3}
-                                onChange={e => setImage3(e.target.value)}
+                                id='image3'
+                                placeholder="2nd Optional Image"
+                                value={image}
+                                onChange={e => setImage(image.push(e.target.value))}
                                 />
+                                <button type="submit" onClick={handleSubmit}>Add Product</button>
 
 
                             </div>
