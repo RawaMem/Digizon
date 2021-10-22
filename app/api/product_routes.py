@@ -39,6 +39,30 @@ def add_new_product():
     if form.validate_on_submit():
         new_product = Product(
             user_id=form.data['user_id'],
+            name=form.data['name'],
+            description=form.data['description'],
+            price=form.data['price'],
+            stock_quantity=form.data['stock_quantity'],
+
+        )
+        db.session.add(new_product)
+        db.session.commit()
+
+        return new_product.to_dict()
+    else:
+        return form.errors
+
+
+
+
+# create pictures for a product
+@product_routes.route('/media/new/:userid/:productid', methods=['POST'])
+def add_new_media():
+    form = NewProductForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_product = Product(
+            user_id=form.data['user_id'],
             title=form.data['title'],
             description=form.data['description'],
 
@@ -48,8 +72,12 @@ def add_new_product():
 
         return new_product.to_dict()
     else:
-
         return form.errors
+
+
+
+
+
 
 
 # edit a single product

@@ -74,8 +74,26 @@ export const createProduct = productDetails => async (dispatch) => {
     })
     if (response.ok) {
         const newProductObj = await response.json();
-        dispatch(addProduct(newProductObj))
-        return newProductObj
+        const imagePaylod = {
+            user_id: newProductObj.user_id,
+            product_id: newProductObj.id,
+            image: productDetails.image
+        }
+
+        const imageResponse = await fetch(`/api/products/media/new/${newProductObj.user_id,}/${newProductObj.id,}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(imagePaylod)
+        })
+
+        if (imageResponse.ok) {
+            let productWithImagesObj = await response.json()
+            dispatch(addProduct(productWithImagesObj))
+            return productWithImagesObj
+        }
+
     }
 }
 
