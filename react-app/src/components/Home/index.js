@@ -18,7 +18,7 @@ export const Home = () => {
 
     const displayMainImage = (product) => {
             const productMedia = product?.medias[0]
-            return productMedia.url
+            return productMedia?.url
 
     }
 

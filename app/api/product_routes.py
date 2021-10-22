@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Product
+from app.models import db, Product, Media
 from flask_login import current_user
 from app.forms.new_product_form import NewProductForm
 from app.forms.edit_product_form import EditProductForm
@@ -40,12 +40,24 @@ def add_new_product():
         new_product = Product(
             user_id=form.data['user_id'],
             name=form.data['name'],
+            # url=form.data['url'],
             description=form.data['description'],
             price=form.data['price'],
             stock_quantity=form.data['stock_quantity'],
 
         )
         db.session.add(new_product)
+        db.session.commit()
+
+        new_media = Media(
+            user_id=form.data['user_id'],
+            product_id=new_product.id,
+            url=form.data['url'],
+        )
+
+        db.session.add(new_media)
+
+
         db.session.commit()
 
         return new_product.to_dict()
