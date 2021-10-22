@@ -46,6 +46,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'balance': self.balance,
+            'products': [product.to_dict() for product in self.products],
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
