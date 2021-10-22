@@ -2,38 +2,34 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { createProduct, getAllProducts, deleteOneProduct } from '../../store/products';
+import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
 
 
-
-
-export const Profile = () => {
+export const ProductPage = () => {
+    const {productId} = useParams()
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [name, setName] = useState('');
     const [url, setUrl] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [stock_quantity, setStock_quantity] = useState('');
-    // const [image, setImage] = useState([]);
-    // const [image2, setImage2] = useState('');
-    // const [image3, setImage3] = useState('');
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const allProductsObj = useSelector(state => state?.products)
-    const allProductsList = Object.values(allProductsObj)
+
+    const product = useSelector(state => state?.products)
 
     useEffect(() => {
-        dispatch(getAllProducts())
+        dispatch(getProductDetails(productId))
     }, [dispatch])
 
 
-
-
-    const displayMainImage = (product) => {
+    const imageUrl = (product) => {
         const productMedia = product?.medias[0]
+        console.log("=======>", productMedia)
+
         return productMedia?.url
     }
 
@@ -41,6 +37,7 @@ export const Profile = () => {
         e.preventDefault();
 
         const payload = {
+            id: product.id,
             user_id: user.id,
             name,
             url,
@@ -51,23 +48,16 @@ export const Profile = () => {
             // image2,
             // image3
         };
-
-        dispatch(createProduct(payload))
+        dispatch(editProductDetails(payload))
         setModalIsOpen(false)
     }
 
-    const handleDelete = async(e) => {
-        e.preventDefault();
-        dispatch(deleteOneProduct(e.target.value))
-
-    }
-
-
 
     return (
-        <div className='profile-page-container'>
-            <div className="create-product-btn-container">
-                <button onClick={() => setModalIsOpen(true)}>Sell Product</button>
+        <div className="product-page-container">
+            <h1 className="product-name">{product.name}</h1>
+            <img src={imageUrl(product)} alt="" className="product-img" />
+            <button onClick={() => setModalIsOpen(true)}>Edit Product</button>
                 <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
                     <form onSubmit={handleSubmit}>
                         <div className="create-product-container">
@@ -76,35 +66,35 @@ export const Profile = () => {
                                 type="text"
                                 placeholder="Product Name"
                                 required
-                                value={name}
+                                value={product.name}
                                 onChange={e => setName(e.target.value)}
                                 />
                                 <input
                                 type="text"
                                 placeholder="URL"
                                 required
-                                value={url}
+                                value={imageUrl(product)}
                                 onChange={e => setUrl(e.target.value)}
                                 />
                                 <input
                                 type="textarea"
                                 placeholder="Desciption"
                                 required
-                                value={description}
+                                value={product.description}
                                 onChange={e => setDescription(e.target.value)}
                                 />
                                 <input
                                 type="number"
                                 placeholder="Price"
                                 required
-                                value={price}
+                                value={product.price}
                                 onChange={e => setPrice(e.target.value)}
                                 />
                                 <input
                                 type="number"
                                 placeholder="Stock Quantity"
                                 required
-                                value={stock_quantity}
+                                value={product.stock_quantity}
                                 onChange={e => setStock_quantity(e.target.value)}
                                 />
                                 {/* <label for="image1">Main Image</label>
@@ -132,39 +122,11 @@ export const Profile = () => {
                                 value={image}
                                 onChange={e => setImage(image.push(e.target.value))}
                                 /> */}
-                                <button type="submit" onClick={handleSubmit}>Add Product</button>
-
-
+                                <button type="submit" onClick={handleSubmit}>Edit Product</button>
                             </div>
                         </div>
                     </form>
                 </Modal>
-            </div>
-
-            <div className="user-listed-products">
-            {allProductsList?.map(product => {
-                    return (
-                        product.user_id === user.id ? (
-                        <div className="product-card">
-                            <Link className='product-card-link' to={`/products/${product.id}`}>
-                                <div className="product-img-container">
-                                    <img src={displayMainImage(product)} alt="" className="product-img" />
-                                </div>
-                                <p className="product-name">{product?.name}</p>
-                            </Link>
-                            <p className="product-description">{product?.description}</p>
-                            <p className="product-price">${product?.price}</p>
-                            <p className="product-stock">In Stock: {product?.stock_quantity}</p>
-
-                            <button value={product.id} onClick={handleDelete} className="product-delete">Delete Product</button>
-
-                        </div>) : false
-                    )
-                })}
-
-            </div>
-
-
 
         </div>
     )

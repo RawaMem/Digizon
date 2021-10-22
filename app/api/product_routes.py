@@ -44,7 +44,6 @@ def add_new_product():
             description=form.data['description'],
             price=form.data['price'],
             stock_quantity=form.data['stock_quantity'],
-
         )
         db.session.add(new_product)
         db.session.commit()
@@ -56,13 +55,45 @@ def add_new_product():
         )
 
         db.session.add(new_media)
-
-
         db.session.commit()
-
         return new_product.to_dict()
     else:
         return form.errors
+
+
+
+# edit a single product
+@product_routes.route('/edit/<int:id>', methods=['PATCH'])
+def edit_product(id):
+    form = EditProductForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        product = Product.query.filter(Product.id == id).first()
+
+        product.user_id=current_user.id
+        product.user_id=form.data['user_id']
+        product.name=form.data['name']
+        # url=form.data['url']
+        product.description=form.data['description']
+        product.price=form.data['price']
+        product.stock_quantity=form.data['stock_quantity']
+
+        db.session.add(product)
+        db.session.commit()
+
+        new_media = Media(
+            user_id=form.data['user_id'],
+            product_id=product.id,
+            url=form.data['url'],
+        )
+
+        db.session.add(new_media)
+        db.session.commit()
+        return new_product.to_dict()
+
+    else:
+        return form.errors
+
 
 
 
@@ -83,29 +114,5 @@ def add_new_media():
         db.session.commit()
 
         return new_product.to_dict()
-    else:
-        return form.errors
-
-
-
-
-
-
-
-# edit a single product
-@product_routes.route('/edit/<int:id>', methods=['PATCH'])
-def edit_product(id):
-    form = EditProductForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-    if form.validate_on_submit():
-        product = Product.query.filter(Product.id == id).first()
-
-        product.user_id=current_user.id
-        product.title=form.data['title']
-        product.description=form.data['description']
-
-        db.session.commit()
-        return product.to_dict()
-
     else:
         return form.errors
