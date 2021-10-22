@@ -115,10 +115,8 @@ export const createProduct = productDetails => async (dispatch) => {
 
 
 
-
-
-
 export const editProductDetails = productDetails => async (dispatch) => {
+    console.log('===========@@@@@=======> edit running', productDetails)
     const response = await fetch(`/api/products/edit/${productDetails.id}`, {
         method: 'PATCH',
         headers: {
@@ -160,7 +158,8 @@ const productReducer = (state = initialState, action) => {
             newState[action.newProductObj.id] = action.newProductObj
             return newState
         case EDIT_PRODUCT:
-            newState[action.edittedProductObj.id] = action.edittedProductObj
+            newState.products[action.edittedProductObj.id] = action.edittedProductObj
+            newState.currentProduct = action.edittedProductObj
             return newState
         case DELETE_PRODUCT:
             delete newState[action.deletedProductObj.id]

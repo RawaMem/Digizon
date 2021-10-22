@@ -86,14 +86,12 @@ def edit_product(id):
             product_id=product.id,
             url=form.data['url'],
         )
-
         db.session.add(new_media)
         db.session.commit()
-        return new_product.to_dict()
+        return product.to_dict()
 
     else:
         return form.errors
-
 
 
 
@@ -108,7 +106,6 @@ def add_new_media():
             user_id=form.data['user_id'],
             title=form.data['title'],
             description=form.data['description'],
-
         )
         db.session.add(new_product)
         db.session.commit()

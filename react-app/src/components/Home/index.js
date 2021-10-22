@@ -29,16 +29,18 @@ export const Home = () => {
     return (
 
         <div className="home-page-container">
-            {allProductsObj && (
+            {/* {allProductsObj && ( */}
                 <>
                     <div className="all-products">
                         {allProductsList?.map(product => {
                             return (
                                 <div className="product-card">
-                                    <div className="product-img-container">
-                                        <img src={product?.medias[0]?.url} alt="" className="product-img" />
-                                    </div>
-                                    <p className="product-name">{product?.name}</p>
+                                    <Link className='product-card-link' to={`/products/${product.id}`}>
+                                        <div className="product-img-container">
+                                            <img src={product?.medias[0]?.url} alt="" className="product-img" />
+                                        </div>
+                                        <p className="product-name">{product?.name}</p>
+                                    </Link>
                                     <p className="product-description">{product?.description}</p>
                                     <p className="product-price">${product?.price}</p>
                                     <p className="product-stock">In Stock: {product?.stock_quantity}</p>
@@ -47,7 +49,7 @@ export const Home = () => {
                         })}
                     </div>
                 </>
-            )}
+            {/* )} */}
         </div>
 
 

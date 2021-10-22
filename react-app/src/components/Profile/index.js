@@ -8,8 +8,6 @@ import { Modal } from '../Modal';
 // import './index.css'
 
 
-
-
 export const Profile = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [name, setName] = useState('');
@@ -159,7 +157,6 @@ export const Profile = () => {
                             <p className="product-description">{product?.description}</p>
                             <p className="product-price">${product?.price}</p>
                             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
-
                             <button value={product.id} onClick={handleDelete} className="product-delete">Delete Product</button>
 
                         </div>
