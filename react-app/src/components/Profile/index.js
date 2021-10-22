@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { getAllMedias } from '../../store/medias';
 import { createProduct, getAllProducts, deleteOneProduct } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
@@ -22,11 +23,14 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const allProductsObj = useSelector(state => state?.products)
+    const allProductsObj = useSelector(state => state?.products?.products)
     const allProductsList = Object.values(allProductsObj)
+    const medias = useSelector(state => state?.medias)
+
 
     useEffect(() => {
         dispatch(getAllProducts())
+        dispatch(getAllMedias())
     }, [dispatch])
 
 
@@ -158,7 +162,8 @@ export const Profile = () => {
 
                             <button value={product.id} onClick={handleDelete} className="product-delete">Delete Product</button>
 
-                        </div>) : false
+                        </div>
+                        ) : false
                     )
                 })}
 

@@ -20,20 +20,36 @@ export const ProductPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
 
-    const product = useSelector(state => state?.products)
+    const product = useSelector(state => state?.products?.currentProduct)
     const medias = useSelector(state => state?.medias)
+    const allMediasList = Object.values(medias)
+
 
     useEffect(() => {
         dispatch(getProductDetails(productId))
-        dispatch(getMediaDetails(productId))
+        dispatch(getAllMedias())
     }, [dispatch])
 
-        console.log("=======>", medias)
+    const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
+    const firstImg = productImgList[0]
+
+
+    console.log("=========@@@@@===>", productImgList)
 
     // const imageUrl = (product) => {
-    //     const productMedia = product?.medias[0]
-    //     return productMedia?.url
+    //     const productMedia = product?.medias
+    //      const productObj = productMedia[0]
+    //         console.log('=============@@@@@@@@@@========>',productMedia[0])
+    //     return productObj?.url
     // }
+
+//     const displayMainImage = (product) => {
+//         const productMedia = product?.medias[0]
+//         // const productObj = productMedia[0]
+//         // console.log('=============@@@@@@@@@@========>',productMedia[0])
+//         return productMedia?.url
+// }
+
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -57,8 +73,10 @@ export const ProductPage = () => {
 
     return (
         <div className="product-page-container">
-            <h1 className="product-name">{product.name}</h1>
-            {/* <img src={imageUrl(product)} alt="" className="product-img" /> */}
+            {medias && (
+            <>
+            <h1 className="product-name">{product?.name}</h1>
+            <img src={firstImg?.url} alt="" className="product-img" />
             <button onClick={() => setModalIsOpen(true)}>Edit Product</button>
                 <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
                     <form onSubmit={handleSubmit}>
@@ -68,35 +86,35 @@ export const ProductPage = () => {
                                 type="text"
                                 placeholder="Product Name"
                                 required
-                                value={product.name}
+                                value={product?.name}
                                 onChange={e => setName(e.target.value)}
                                 />
                                 <input
                                 type="text"
                                 placeholder="URL"
                                 required
-                                // value={imageUrl(product)}
+                                // value={imageUrl(product?)}
                                 onChange={e => setUrl(e.target.value)}
                                 />
                                 <input
                                 type="textarea"
                                 placeholder="Desciption"
                                 required
-                                value={product.description}
+                                value={product?.description}
                                 onChange={e => setDescription(e.target.value)}
                                 />
                                 <input
                                 type="number"
                                 placeholder="Price"
                                 required
-                                value={product.price}
+                                value={product?.price}
                                 onChange={e => setPrice(e.target.value)}
                                 />
                                 <input
                                 type="number"
                                 placeholder="Stock Quantity"
                                 required
-                                value={product.stock_quantity}
+                                value={product?.stock_quantity}
                                 onChange={e => setStock_quantity(e.target.value)}
                                 />
                                 {/* <label for="image1">Main Image</label>
@@ -129,7 +147,8 @@ export const ProductPage = () => {
                         </div>
                     </form>
                 </Modal>
-
+                </>
+            )}
         </div>
     )
 }

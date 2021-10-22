@@ -144,15 +144,18 @@ export const deleteOneProduct = id => async (dispatch) => {
 }
 
 
-const initialState = {}
+const initialState = {products:{}, currentProduct:{}}
 
 const productReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case GET_PRODUCTS:
-            return action.productsObj
+            newState.products= action.productsObj
+            // newState.currentProduct= {}
+            return newState
         case PRODUCT_DETAILS:
-            return action.productDetailsObj
+            newState.currentProduct = action.productDetailsObj
+            return newState
         case ADD_PRODUCT:
             newState[action.newProductObj.id] = action.newProductObj
             return newState
