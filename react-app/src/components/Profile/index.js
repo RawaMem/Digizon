@@ -22,6 +22,13 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
+    const allProductsObj = useSelector(state => state?.products)
+    const allProductsList = Object.values(allProductsObj)
+
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, [dispatch])
+
 
 
 
@@ -51,16 +58,9 @@ export const Profile = () => {
 
     const handleDelete = async(e) => {
         e.preventDefault();
-
-        const payload = {
-            id: e.target.value
-        }
-
-        dispatch(deleteOneProduct(payload))
+        dispatch(deleteOneProduct(e.target.value))
 
     }
-
-
 
 
 
@@ -142,8 +142,9 @@ export const Profile = () => {
             </div>
 
             <div className="user-listed-products">
-            {user?.products?.map(product => {
+            {allProductsList?.map(product => {
                     return (
+                        product.user_id === user.id ? (
                         <div className="product-card">
                             <div className="product-img-container">
                                 <img src={displayMainImage(product)} alt="" className="product-img" />
@@ -154,7 +155,7 @@ export const Profile = () => {
                             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
                             <button value={product.id} onClick={handleDelete} className="product-delete">Delete Product</button>
 
-                        </div>
+                        </div>) : false
                     )
                 })}
 
