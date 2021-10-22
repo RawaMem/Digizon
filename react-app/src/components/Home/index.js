@@ -17,7 +17,7 @@ export const Home = () => {
 
 
     const displayMainImage = (product) => {
-            const productMedia = product.medias[0]
+            const productMedia = product?.medias[0]
             return productMedia.url
 
     }
@@ -29,7 +29,7 @@ export const Home = () => {
 
         <div className="home-page-container">
             <div className="all-products">
-                {allProductsList.map(product => {
+                {allProductsList?.map(product => {
                     return (
                         <div className="product-card">
                             <div className="product-img-container">
