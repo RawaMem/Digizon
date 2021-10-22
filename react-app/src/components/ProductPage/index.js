@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { getAllMedias, getMediaDetails } from '../../store/medias';
 import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
@@ -20,18 +21,19 @@ export const ProductPage = () => {
     const user = useSelector(state => state?.session?.user)
 
     const product = useSelector(state => state?.products)
+    const medias = useSelector(state => state?.medias)
 
     useEffect(() => {
         dispatch(getProductDetails(productId))
+        dispatch(getMediaDetails(productId))
     }, [dispatch])
 
+        console.log("=======>", medias)
 
-    const imageUrl = (product) => {
-        const productMedia = product?.medias[0]
-        console.log("=======>", productMedia)
-
-        return productMedia?.url
-    }
+    // const imageUrl = (product) => {
+    //     const productMedia = product?.medias[0]
+    //     return productMedia?.url
+    // }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -56,7 +58,7 @@ export const ProductPage = () => {
     return (
         <div className="product-page-container">
             <h1 className="product-name">{product.name}</h1>
-            <img src={imageUrl(product)} alt="" className="product-img" />
+            {/* <img src={imageUrl(product)} alt="" className="product-img" /> */}
             <button onClick={() => setModalIsOpen(true)}>Edit Product</button>
                 <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
                     <form onSubmit={handleSubmit}>
@@ -73,7 +75,7 @@ export const ProductPage = () => {
                                 type="text"
                                 placeholder="URL"
                                 required
-                                value={imageUrl(product)}
+                                // value={imageUrl(product)}
                                 onChange={e => setUrl(e.target.value)}
                                 />
                                 <input
