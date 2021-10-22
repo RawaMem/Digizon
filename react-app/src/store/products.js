@@ -80,7 +80,7 @@ export const createProduct = productDetails => async (dispatch) => {
             image: productDetails.image
         }
 
-        const imageResponse = await fetch(`/api/products/media/new/${newProductObj.user_id,}/${newProductObj.id,}`, {
+        const imageResponse = await fetch(`/api/products/media/new/${newProductObj.user_id}/${newProductObj.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json'
