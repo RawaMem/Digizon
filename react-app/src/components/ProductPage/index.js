@@ -12,7 +12,7 @@ export const ProductPage = () => {
     const {productId} = useParams()
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
-    
+
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
     const product = useSelector(state => state?.products?.currentProduct)
@@ -20,11 +20,11 @@ export const ProductPage = () => {
     const allMediasList = Object.values(medias)
 
 
-    const [name, setName] = useState(product?.name);
-    const [url, setUrl] = useState(product?.url);
-    const [description, setDescription] = useState(product?.description);
-    const [price, setPrice] = useState(product?.price);
-    const [stock_quantity, setStock_quantity] = useState(product?.stock_quantity);
+    const [name, setName] = useState('');
+    const [url, setUrl] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [stock_quantity, setStock_quantity] = useState('');
 
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export const ProductPage = () => {
     const firstImg = productImgList[0]
 
 
-    console.log("=========@@@@@===>", productImgList)
+    console.log("=========@@@@@===>", name)
 
     // const imageUrl = (product) => {
     //     const productMedia = product?.medias
