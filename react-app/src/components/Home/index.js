@@ -8,7 +8,7 @@ import './index.css'
 export const Home = () => {
     const dispatch = useDispatch();
 
-    const allProductsObj = useSelector(state => state?.products)
+    const allProductsObj = useSelector(state => state?.products?.products)
     const allProductsList = Object.values(allProductsObj)
 
     useEffect(() => {
@@ -16,11 +16,12 @@ export const Home = () => {
     }, [dispatch])
 
 
-    const displayMainImage = (product) => {
-            const productMedia = product?.medias[0]
-            return productMedia.url
-
-    }
+    // const displayMainImage = (product) => {
+    //         const productMedia = product?.medias[0]
+    //         // const productObj = productMedia[0]
+    //         // console.log('=============@@@@@@@@@@========>',productMedia[0])
+    //         return productMedia?.url
+    // }
 
 
 
@@ -28,29 +29,29 @@ export const Home = () => {
     return (
 
         <div className="home-page-container">
-            <div className="all-products">
-                {allProductsList?.map(product => {
-                    return (
-                        <div className="product-card">
-                            <div className="product-img-container">
-                                <img src={displayMainImage(product)} alt="" className="product-img" />
-                            </div>
-                            <p className="product-name">{product?.name}</p>
-                            <p className="product-description">{product?.description}</p>
-                            <p className="product-price">${product?.price}</p>
-                            <p className="product-stock">In Stock: {product?.stock_quantity}</p>
-
-                        </div>
-                    )
-                })}
-            </div>
-
-
-
-
-
-
+            {/* {allProductsObj && ( */}
+                <>
+                    <div className="all-products">
+                        {allProductsList?.map(product => {
+                            return (
+                                <div className="product-card">
+                                    <Link className='product-card-link' to={`/products/${product.id}`}>
+                                        <div className="product-img-container">
+                                            <img src={product?.medias[0]?.url} alt="" className="product-img" />
+                                        </div>
+                                        <p className="product-name">{product?.name}</p>
+                                    </Link>
+                                    <p className="product-description">{product?.description}</p>
+                                    <p className="product-price">${product?.price}</p>
+                                    <p className="product-stock">In Stock: {product?.stock_quantity}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
+            {/* )} */}
         </div>
+
 
     )
 }

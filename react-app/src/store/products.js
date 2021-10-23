@@ -64,6 +64,40 @@ export const getProductDetails = (id) => async(dispatch) => {
 }
 
 
+// export const createProduct = productDetails => async (dispatch) => {
+//     const response = await fetch('/api/products/new', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify(productDetails)
+//     })
+//     if (response.ok) {
+//         const newProductObj = await response.json();
+//         const imagePaylod = {
+//             user_id: newProductObj.user_id,
+//             product_id: newProductObj.id,
+//             image: productDetails.image
+//         }
+
+//         const imageResponse = await fetch(`/api/products/media/new/${newProductObj.user_id}/${newProductObj.id}`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type':'application/json'
+//             },
+//             body: JSON.stringify(imagePaylod)
+//         })
+
+//         if (imageResponse.ok) {
+//             let productWithImagesObj = await response.json()
+//             dispatch(addProduct(productWithImagesObj))
+//             return productWithImagesObj
+//         }
+
+//     }
+// }
+
+
 export const createProduct = productDetails => async (dispatch) => {
     const response = await fetch('/api/products/new', {
         method: 'POST',
@@ -74,31 +108,15 @@ export const createProduct = productDetails => async (dispatch) => {
     })
     if (response.ok) {
         const newProductObj = await response.json();
-        const imagePaylod = {
-            user_id: newProductObj.user_id,
-            product_id: newProductObj.id,
-            image: productDetails.image
-        }
-
-        const imageResponse = await fetch(`/api/products/media/new/${newProductObj.user_id}/${newProductObj.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(imagePaylod)
-        })
-
-        if (imageResponse.ok) {
-            let productWithImagesObj = await response.json()
-            dispatch(addProduct(productWithImagesObj))
-            return productWithImagesObj
-        }
-
+        dispatch(addProduct(newProductObj))
+        return newProductObj
     }
 }
 
 
+
 export const editProductDetails = productDetails => async (dispatch) => {
+    console.log('===========@@@@@=======> edit running', productDetails)
     const response = await fetch(`/api/products/edit/${productDetails.id}`, {
         method: 'PATCH',
         headers: {
@@ -124,20 +142,24 @@ export const deleteOneProduct = id => async (dispatch) => {
 }
 
 
-const initialState = {}
+const initialState = {products:{}, currentProduct:{}}
 
 const productReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case GET_PRODUCTS:
-            return action.productsObj
+            newState.products= action.productsObj
+            // newState.currentProduct= {}
+            return newState
         case PRODUCT_DETAILS:
-            return action.productDetailsObj
+            newState.currentProduct = action.productDetailsObj
+            return newState
         case ADD_PRODUCT:
             newState[action.newProductObj.id] = action.newProductObj
             return newState
         case EDIT_PRODUCT:
-            newState[action.edittedProductObj.id] = action.edittedProductObj
+            newState.products[action.edittedProductObj.id] = action.edittedProductObj
+            newState.currentProduct = action.edittedProductObj
             return newState
         case DELETE_PRODUCT:
             delete newState[action.deletedProductObj.id]
