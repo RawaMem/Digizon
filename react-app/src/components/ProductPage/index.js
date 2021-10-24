@@ -78,7 +78,7 @@ export const ProductPage = () => {
             {/* {medias && ( */}
             <>
             <h1 className="product-name">{product?.name}</h1>
-            <img src={firstImg?.url} alt="" className="product-img" />
+            <img src={product?.cover_img_url} alt="" className="product-img" />
             {product?.user_id === user?.id && (
                 <>
                     <button onClick={() => setModalIsOpen(true)}>Edit Product</button>

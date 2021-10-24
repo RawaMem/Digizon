@@ -6,7 +6,7 @@ from app.models.media import Media
 
 def seed_products():
     product1 = Product(
-        user_id=1, name='Xbox Series X', description='newest and most powerful Xbox console', cover_img_url='https://cdn.vox-cdn.com/thumbor/fR3vjUYAmKF0DjuXEDOg2JNb5l8=/0x0:2040x1360/1820x1213/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/69067203/vpavic_201103_4275_0163.0.jpg'', price=499.99, stock_quantity=10)
+        user_id=1, name='Xbox Series X', description='newest and most powerful Xbox console', cover_img_url='https://cdn.vox-cdn.com/thumbor/fR3vjUYAmKF0DjuXEDOg2JNb5l8=/0x0:2040x1360/1820x1213/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/69067203/vpavic_201103_4275_0163.0.jpg', price=499.99, stock_quantity=10)
     product2 = Product(
         user_id=2, name='Playstation 5', description='newest and most powerful Playstation console', cover_img_url='https://api.time.com/wp-content/uploads/2020/11/best-inventions-of-2020-Playstation-5-4.jpg?w=1600&quality=70', price=399.99, stock_quantity=9)
     product3 = Product(
