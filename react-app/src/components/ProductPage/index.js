@@ -20,23 +20,24 @@ export const ProductPage = () => {
     const allMediasList = Object.values(medias)
 
 
-    const [name, setName] = useState('');
-    const [url, setUrl] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [stock_quantity, setStock_quantity] = useState('');
+    const [name, setName] = useState(product?.name);
+    const [description, setDescription] = useState(product?.description);
+    const [cover_img_url, setCover_img_url] = useState(product?.cover_img_url);
+    const [price, setPrice] = useState(product?.price);
+    const [stock_quantity, setStock_quantity] = useState(product?.stock_quantity);
 
 
     useEffect(() => {
+        dispatch(getAllProducts())
         dispatch(getProductDetails(productId))
         dispatch(getAllMedias())
     }, [dispatch])
 
     const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
-    const firstImg = productImgList[0]
+    // const firstImg = productImgList[0]
 
 
-    console.log("=========@@@@@===>", name)
+    // console.log("=========@@@@@===>", name)
 
     // const imageUrl = (product) => {
     //     const productMedia = product?.medias
@@ -60,8 +61,8 @@ export const ProductPage = () => {
             id: product.id,
             user_id: user.id,
             name,
-            url,
             description,
+            cover_img_url,
             price,
             stock_quantity
             // image,
@@ -90,35 +91,35 @@ export const ProductPage = () => {
                                     type="text"
                                     placeholder="Product Name"
                                     required
-                                    value={product?.name}
+                                    value={name}
                                     onChange={e => setName(e.target.value)}
-                                    />
-                                    <input
-                                    type="text"
-                                    placeholder="URL"
-                                    required
-                                    // value={imageUrl(product?)}
-                                    onChange={e => setUrl(e.target.value)}
                                     />
                                     <input
                                     type="textarea"
                                     placeholder="Desciption"
                                     required
-                                    value={product?.description}
+                                    value={description}
                                     onChange={e => setDescription(e.target.value)}
+                                    />
+                                    <input
+                                    type="input"
+                                    placeholder="Cover Image URL"
+                                    required
+                                    value={cover_img_url}
+                                    onChange={e => setCover_img_url(e.target.value)}
                                     />
                                     <input
                                     type="number"
                                     placeholder="Price"
                                     required
-                                    value={product?.price}
+                                    value={price}
                                     onChange={e => setPrice(e.target.value)}
                                     />
                                     <input
                                     type="number"
                                     placeholder="Stock Quantity"
                                     required
-                                    value={product?.stock_quantity}
+                                    value={stock_quantity}
                                     onChange={e => setStock_quantity(e.target.value)}
                                     />
                                     {/* <label for="image1">Main Image</label>

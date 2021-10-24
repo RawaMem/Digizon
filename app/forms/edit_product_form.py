@@ -4,10 +4,11 @@ from wtforms.validators import DataRequired
 
 
 class EditProductForm(FlaskForm):
-    id = IntegerField('User Id', validators=[DataRequired()])
-    user_id = IntegerField('User Id', validators=[DataRequired()])
-    name = StringField('Title', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    price = IntegerField('Price', validators=[DataRequired()])
-    stock_quantity = IntegerField('Stock Quantity', validators=[DataRequired()])
+    id = IntegerField('id', validators=[DataRequired()])
+    user_id = IntegerField('user_id', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    cover_img_url = StringField('cover_img_url', validators=[DataRequired()])
+    price = IntegerField('price', validators=[DataRequired()])
+    stock_quantity = IntegerField('stock_quantity', validators=[DataRequired()])
     submit = SubmitField('Submit')
