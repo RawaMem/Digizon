@@ -14,6 +14,7 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
+    cover_img_url = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     stock_quantity = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
@@ -36,6 +37,7 @@ class Product(db.Model):
             'user_id': self.user_id,
             'name': self.name,
             'description': self.description,
+            'cover_img_url': self.cover_img_url,
             'price': self.price,
             'stock_quantity': self.stock_quantity,
             'medias': [media.to_dict() for media in self.medias],
