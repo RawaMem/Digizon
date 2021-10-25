@@ -123,9 +123,14 @@ def get_carts():
 # get single cart
 @product_routes.route('/cart/<int:id>')
 def get_one_cart(id):
+
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    productsList = list(cart.products.values)
-    quantities = {product.id: product.quantity_in_cart for product in productsList}
+    workCart = cart.to_dict()
+    print(CBLUEBG, 'get cart running', workCart, CEND)
+    quantities = {}
+    if workCart['products']:
+        productsList = [workCart.products[key] for key in workCart.products]
+        quantities = {product.id: product.quantity_in_cart for product in productsList}
     return {"cart": cart.to_dict(), "quantityObj": quantities}
 
 
@@ -145,10 +150,11 @@ def delete_product_from_cart(productId):
 # add product to cart
 @product_routes.route('/cart/add/<int:productId>/<int:quantity>', methods=['POST'])
 def add_new_product_to_cart(productId, quantity):
+    print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     product.quantity_in_cart = quantity
-    cart.products[product.id] = product
+    cart.products.append(product)
     db.session.add(product)
     db.session.add(cart)
     db.session.commit()

@@ -210,6 +210,7 @@ export const getCartDetails = (id) => async (dispatch) => {
 };
 
 export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
+  console.log('===========@@@@@=======> add to cart running', cartDetails)
   const response = await fetch(
     `/api/products/cart/add/${cartDetails.productId}/${cartDetails.quantity}`,
     {
@@ -228,7 +229,6 @@ export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
 };
 
 export const editQuantityOfProductThunk = (cartDetails) => async (dispatch) => {
-  // console.log('===========@@@@@=======> edit running', cartDetails)
   const response = await fetch(
     `/api/products/cart/edit/${cartDetails.id}/${cartDetails.quantity}`,
     {
