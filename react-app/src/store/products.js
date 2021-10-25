@@ -135,6 +135,8 @@ export const editProductDetails = productDetails => async (dispatch) => {
 
 
 export const deleteOneProduct = id => async (dispatch) => {
+    console.log('===========@@@@@=======> edit running', id)
+
     const response = await fetch(`/api/products/delete/${id}`)
     if (response.ok) {
         const deletedProductObj = await response.json();
@@ -278,7 +280,7 @@ const productReducer = (state = initialState, action) => {
             newState.currentProduct = action.edittedProductObj
             return newState
         case DELETE_PRODUCT:
-            delete newState[action.deletedProductObj.id]
+            delete newState.products[action.deletedProductObj.id]
             return newState
         case GET_CART:
             newState.cart = action.cartObj.cart;

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getAllMedias, getMediaDetails } from '../../store/medias';
-import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails } from '../../store/products';
+import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails, getCartDetails, addProductToCartThunk } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
 
@@ -16,8 +16,10 @@ export const ProductPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
     const product = useSelector(state => state?.products?.currentProduct)
+    const cart = useSelector(state => state?.products?.cart)
     const medias = useSelector(state => state?.medias)
     const allMediasList = Object.values(medias)
+    let productsInCartList = []
 
 
     const [name, setName] = useState(product?.name);
@@ -25,13 +27,22 @@ export const ProductPage = () => {
     const [cover_img_url, setCover_img_url] = useState(product?.cover_img_url);
     const [price, setPrice] = useState(product?.price);
     const [stock_quantity, setStock_quantity] = useState(product?.stock_quantity);
+    const [addQuantity, setAddQuantity] = useState(1);
+
+    if (cart?.products === undefined) {
+        productsInCartList = [];
+    } else {
+        productsInCartList = Object.values(cart?.products)
+    }
 
 
     useEffect(() => {
         dispatch(getAllProducts())
         dispatch(getProductDetails(productId))
-        dispatch(getAllMedias())
-    }, [dispatch])
+        dispatch(getCartDetails(user?.id))
+
+        // dispatch(getAllMedias())
+    }, [dispatch, productsInCartList.length])
 
     const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
     // const firstImg = productImgList[0]
@@ -54,9 +65,25 @@ export const ProductPage = () => {
 // }
 
 
+    let stockQuantity = []
+    for (let i = 1; i <= product?.stock_quantity; i++) {
+        stockQuantity.push(i)
+    }
+
+    const handleAddToCart = async(e) => {
+        e.preventDefault();
+        const payload = {
+            productId: product.id,
+            quantity: addQuantity
+        };
+        dispatch(addProductToCartThunk(payload))
+    }
+
+
+
+
     const handleSubmit = async(e) => {
         e.preventDefault();
-
         const payload = {
             id: product.id,
             user_id: user.id,
@@ -76,10 +103,43 @@ export const ProductPage = () => {
 
     return (
         <div className="product-page-container">
-            {/* {medias && ( */}
+
             <>
+            <div className="product-page-navbar">
+                <div className="logo-container">
+
+                </div>
+                <div className="searchbar-container">
+
+                </div>
+                <div className="cart-container">
+                    <p className="cart">Cart: {productsInCartList.length}</p>
+                </div>
+
+            </div>
             <h1 className="product-name">{product?.name}</h1>
             <img src={product?.cover_img_url} alt="" className="product-img" />
+            <p className="product-description">{product?.description}</p>
+            <p className="product-price">${product?.price}</p>
+            <p className="product-stock">In Stock: {product?.stock_quantity}</p>
+
+
+            {/* <form onSubmit={handleAddToCart}>
+                <div className="add-to-cart-container">
+                    <select value={addQuantity} onChange={setAddQuantity((e) => e.target.value)}>
+                        {stockQuantity.map(quantity => {
+                            return (
+                                <option value={quantity}>quantity</option>
+                            )
+                        })}
+                    </select>
+                    <submit className="add-to-cart-submit">Add To Cart</submit>
+
+                </div>
+            </form> */}
+
+
+
             {product?.user_id === user?.id && (
                 <>
                     <button onClick={() => setModalIsOpen(true)}>Edit Product</button>
