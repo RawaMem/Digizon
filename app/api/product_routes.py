@@ -124,7 +124,7 @@ def get_carts():
 @product_routes.route('/cart/<int:id>')
 def get_one_cart(id):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    productsList = list(cart.values)
+    productsList = list(cart.products.values)
     quantities = {product.id: product.quantity_in_cart for product in productsList}
     return {"cart": cart.to_dict(), "quantityObj": quantities}
 
