@@ -69,7 +69,6 @@ export const ProductPage = () => {
     for (let i = 1; i <= product?.stock_quantity; i++) {
         stockQuantity.push(i)
     }
-    console.log('=========@@@@@>', stockQuantity)
 
     const handleAddToCart = async(e) => {
         e.preventDefault();
@@ -77,6 +76,7 @@ export const ProductPage = () => {
             productId: product.id,
             quantity: addQuantity
         };
+        console.log('=========@@@@@>', payload)
         dispatch(addProductToCartThunk(payload))
     }
 
