@@ -1,8 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { getAllMedias } from '../../store/medias';
+import { Link } from 'react-router-dom';
+// import { getAllMedias } from '../../store/medias';
 import { createProduct, getAllProducts, deleteOneProduct } from '../../store/products';
 import { Modal } from '../Modal';
 // import './index.css'
@@ -53,6 +53,7 @@ export const Profile = () => {
             // image2,
             // image3
         };
+        console.log('===========@@@@@@>', payload)
         dispatch(createProduct(payload))
         setModalIsOpen(false)
     }

@@ -99,6 +99,8 @@ export const getProductDetails = (id) => async(dispatch) => {
 
 
 export const createProduct = productDetails => async (dispatch) => {
+    console.log('===========@@@@@@>thunk', productDetails)
+
     const response = await fetch('/api/products/new', {
         method: 'POST',
         headers: {

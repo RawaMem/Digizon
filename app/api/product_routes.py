@@ -12,7 +12,6 @@ product_routes = Blueprint('products', __name__, url_prefix='/products')
 @product_routes.route('/')
 def get_products():
     products = Product.query.all()
-
     return {product.id:product.to_dict() for product in products}
 
 # get single product
@@ -164,7 +163,7 @@ def add_new_product_to_cart(productId, quantity):
 
 # Edit Quantity Of Product In Cart
 @product_routes.route('/cart/edit/<int:productId>/<int:quantity>', methods=['PATCH'])
-def edit_quantity_of_prouct(productId, quantity):
+def edit_quantity_of_product(productId, quantity):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     product.quantity_in_cart = quantity
