@@ -4,6 +4,7 @@ from flask_login import current_user
 from app.forms.new_product_form import NewProductForm
 from app.forms.edit_product_form import EditProductForm
 # from app.aws import upload_file_to_s3, allowed_file, get_unique_filename
+from app.colors import CBLUEBG, CEND
 
 product_routes = Blueprint('products', __name__, url_prefix='/products')
 
@@ -36,10 +37,11 @@ def add_new_product():
     form = NewProductForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        print(CBLUEBG, ' create new product form validate is working', CEND)
         new_product = Product(
             user_id=form.data['user_id'],
             name=form.data['name'],
-            # url=form.data['url'],
+            cover_img_url=form.data['cover_img_url'],
             description=form.data['description'],
             price=form.data['price'],
             stock_quantity=form.data['stock_quantity'],
@@ -47,13 +49,6 @@ def add_new_product():
         db.session.add(new_product)
         db.session.commit()
 
-        new_media = Media(
-            user_id=form.data['user_id'],
-            product_id=new_product.id,
-            url=form.data['url'],
-        )
-
-        db.session.add(new_media)
         db.session.commit()
         return new_product.to_dict()
     else:
