@@ -69,6 +69,7 @@ export const ProductPage = () => {
     for (let i = 1; i <= product?.stock_quantity; i++) {
         stockQuantity.push(i)
     }
+    console.log('=========@@@@@>', stockQuantity)
 
     const handleAddToCart = async(e) => {
         e.preventDefault();
@@ -124,19 +125,19 @@ export const ProductPage = () => {
             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
 
 
-            {/* <form onSubmit={handleAddToCart}>
+            <form onSubmit={handleAddToCart}>
                 <div className="add-to-cart-container">
-                    <select value={addQuantity} onChange={setAddQuantity((e) => e.target.value)}>
-                        {stockQuantity.map(quantity => {
+                    <select value={addQuantity} onChange={(e) => setAddQuantity(e.target.value)}>
+                        {stockQuantity?.map(quantity => {
                             return (
-                                <option value={quantity}>quantity</option>
+                                <option value={quantity}>{quantity}</option>
                             )
                         })}
                     </select>
-                    <submit className="add-to-cart-submit">Add To Cart</submit>
+                    <button type='submit' className="add-to-cart-submit">Add To Cart</button>
 
                 </div>
-            </form> */}
+            </form>
 
 
 
