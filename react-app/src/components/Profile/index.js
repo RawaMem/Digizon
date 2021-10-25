@@ -53,7 +53,6 @@ export const Profile = () => {
             // image2,
             // image3
         };
-
         dispatch(createProduct(payload))
         setModalIsOpen(false)
     }
@@ -61,9 +60,7 @@ export const Profile = () => {
     const handleDelete = async(e) => {
         e.preventDefault();
         dispatch(deleteOneProduct(e.target.value))
-
     }
-
 
 
     return (
