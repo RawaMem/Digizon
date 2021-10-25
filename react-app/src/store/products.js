@@ -116,7 +116,7 @@ export const createProduct = productDetails => async (dispatch) => {
 
 
 export const editProductDetails = productDetails => async (dispatch) => {
-    console.log('===========@@@@@=======> edit running', productDetails)
+    // console.log('===========@@@@@=======> edit running', productDetails)
     const response = await fetch(`/api/products/edit/${productDetails.id}`, {
         method: 'PATCH',
         headers: {

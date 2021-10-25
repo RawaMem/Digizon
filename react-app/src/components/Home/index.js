@@ -37,7 +37,7 @@ export const Home = () => {
                                 <div className="product-card">
                                     <Link className='product-card-link' to={`/products/${product.id}`}>
                                         <div className="product-img-container">
-                                            <img src={product?.medias[0]?.url} alt="" className="product-img" />
+                                            <img src={product?.cover_img_url} alt="" className="product-img" />
                                         </div>
                                         <p className="product-name">{product?.name}</p>
                                     </Link>

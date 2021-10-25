@@ -70,24 +70,24 @@ def edit_product(id):
     if form.validate_on_submit():
         product = Product.query.filter(Product.id == id).first()
 
-        product.user_id=current_user.id
-        product.user_id=form.data['user_id']
+        # product.user_id=current_user.id
+        # product.user_id=form.data['user_id']
         product.name=form.data['name']
-        # url=form.data['url']
         product.description=form.data['description']
+        product.cover_img_url=form.data['cover_img_url']
         product.price=form.data['price']
         product.stock_quantity=form.data['stock_quantity']
 
         db.session.add(product)
         db.session.commit()
 
-        new_media = Media(
-            user_id=form.data['user_id'],
-            product_id=product.id,
-            url=form.data['url'],
-        )
-        db.session.add(new_media)
-        db.session.commit()
+        # new_media = Media(
+        #     user_id=form.data['user_id'],
+        #     product_id=product.id,
+        #     url=form.data['url'],
+        # )
+        # db.session.add(new_media)
+        # db.session.commit()
         return product.to_dict()
 
     else:
