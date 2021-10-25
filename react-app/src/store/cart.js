@@ -13,34 +13,34 @@ const getCart = cartObj => {
 }
 
 
-const cartDetails = cartDetailsObj => {
+const cartDetails = cartObj => {
     return {
         type: CART_DETAILS,
-        cartDetailsObj
+        cartObj
     }
 }
 
 
-const addProductToCart = addedProductToCartObj => {
+const addProductToCart = cartObj => {
     return {
         type: ADD_PRODUCT_TO_CART,
-        addedProductToCartObj
+        cartObj
     }
 }
 
 
-const editQuantityOfProductInCart = edittedQuantityCartObj => {
+const editQuantityOfProductInCart = cartObj => {
     return {
         type: EDIT_QUANTITY_OF_PRODUCT_IN_CART,
-        edittedQuantityCartObj
+        cartObj
     }
 }
 
 
-const deleteProductFromCart = deletedFromCartObj => {
+const deleteProductFromCart = cartObj => {
     return {
         type: DELETE_PRODUCT_FROM_CART,
-        deletedFromCartObj
+        cartObj
     }
 }
 
@@ -57,15 +57,15 @@ export const getAllCarts = () => async (dispatch) => {
 export const getCartDetails = (id) => async(dispatch) => {
     const response = await fetch(`/api/carts/${id}`)
     if (response.ok) {
-        let cartDetailsObj = await response.json()
-        dispatch(cartDetails(cartDetailsObj))
-        return cartDetailsObj
+        let cartObj = await response.json()
+        dispatch(cartDetails(cartObj))
+        return cartObj
     }
 }
 
 
 export const addProductToCartThunk = cartDetails => async (dispatch) => {
-    const response = await fetch('/api/carts/new', {
+    const response = await fetch(`/api/carts/add/${cartDetails.productId}/${cartDetails.quantity}`, {
         method: 'POST',
         headers: {
             'Content-Type':'application/json'
@@ -73,9 +73,9 @@ export const addProductToCartThunk = cartDetails => async (dispatch) => {
         body: JSON.stringify(cartDetails)
     })
     if (response.ok) {
-        const addedProductToCartObj = await response.json();
-        dispatch(addProductToCart(addedProductToCartObj))
-        return addedProductToCartObj
+        const cartObj = await response.json();
+        dispatch(addProductToCart(cartObj))
+        return cartObj
     }
 }
 
@@ -91,46 +91,47 @@ export const editQuantityOfProductThunk = cartDetails => async (dispatch) => {
         body: JSON.stringify(cartDetails)
     })
     if (response.ok) {
-        const edittedQuantityCartObj = await response.json()
-        dispatch(editQuantityOfProductInCart(edittedQuantityCartObj))
-        return edittedQuantityCartObj
+        const cartObj = await response.json()
+        dispatch(editQuantityOfProductInCart(cartObj))
+        return cartObj
     }
 }
 
 
-export const deleteProductFromCartThunk = id => async (dispatch) => {
-    const response = await fetch(`/api/carts/delete/${id}`)
+export const deleteProductFromCartThunk = cartDetails => async (dispatch) => {
+    const response = await fetch(`/api/carts/delete/${cartDetails.id}/${cartDetails.quantity}`)
     if (response.ok) {
-        const deletedFromCartObj = await response.json();
-        dispatch(deleteProductFromCart(deletedFromCartObj))
-        return deletedFromCartObj
+        const cartObj = await response.json();
+        dispatch(deleteProductFromCart(cartObj))
+        return cartObj
     }
 }
 
-// {1:3:{product}}
-const initialState = {cart:{}, productsInCart:[]}
+// productQuantities will be ID as key and quantity as value {1:3}
+const initialState = {cart:{}, productQuantities:{}}
 
 const cartReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case GET_CART:
-            newState.cart= action.cartObj
-            newState.productsInCart = action.cartObj.products
+            newState.cart = action.cartObj.cart
+            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
             return newState
         case CART_DETAILS:
-            newState.currentProduct = action.cartDetailsObj
+            newState.cart = action.cartObj.cart
+            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
             return newState
         case ADD_PRODUCT_TO_CART:
-            newState[action.addedProductToCartObj.id] = action.addedProductToCartObj
-            newState.productsInCart = action.addedProductToCartObj.products
+            newState.cart[action.cartObj.cart.id] = action.cartObj
+            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
             return newState
         case EDIT_QUANTITY_OF_PRODUCT_IN_CART:
-            newState.cart[action.edittedQuantityCartObj.id] = action.edittedQuantityCartObj
-            newState.productsInCart = action.edittedQuantityCartObj.products
+            newState.cart[action.cartObj.cart.id] = action.cartObj
+            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
             return newState
         case DELETE_PRODUCT_FROM_CART:
-            delete newState[action.deletedFromCartObj.id]
-            newState.productsInCart = action.deletedFromCartObj.products
+            delete newState.cart[action.cartObj.cart.id]
+            delete newState.productQuantities[action.cartObj.productId]
 
             return newState
         default:
