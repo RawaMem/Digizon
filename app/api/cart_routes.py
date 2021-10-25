@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Cart, Product
+from app.models import db, Cart, Product, product
 from flask_login import current_user
 from app.forms.new_product_form import NewProductForm
 from app.forms.edit_product_form import EditProductForm
@@ -18,16 +18,18 @@ def get_carts():
 @cart_routes.route('/<int:id>')
 def get_one_cart(id):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    return cart.to_dict()
+    productsList = list(cart.values)
+    quantities = {product.id: product.quantity_in_cart for product in productsList}
+    return {"cart": cart.to_dict(), "quantityObj": quantities}
 
 
 # delete a product from cart
-@cart_routes.route('/delete/<int:productId>/<int:quantity>')
-def delete(productId, quantity):
+@cart_routes.route('/delete/<int:productId>')
+def delete(productId):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     del cart.products[id]
-    product.stock_quantity = ((product.stock_quantity) + quantity)
+    product.quantity_in_cart = 0
     db.session.add(product)
     db.session.add(cart)
     db.session.commit()
@@ -39,8 +41,8 @@ def delete(productId, quantity):
 def add_new_product_to_cart(productId, quantity):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
+    product.quantity_in_cart = quantity
     cart.products[product.id] = product
-    product.stock_quantity = ((product.stock_quantity) - quantity)
     db.session.add(product)
     db.session.add(cart)
     db.session.commit()
@@ -55,11 +57,9 @@ def add_new_product_to_cart(productId, quantity):
 def edit_quantity_of_prouct(productId, quantity):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
-
+    product.quantity_in_cart = quantity
     cart.products[product.id] = product
-
-
-
-
+    db.session.add(product)
     db.session.add(cart)
     db.session.commit()
+    return {"cart": cart.to_dict(), "productId": productId, "quantity": quantity}

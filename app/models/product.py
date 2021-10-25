@@ -17,6 +17,7 @@ class Product(db.Model):
     cover_img_url = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     stock_quantity = db.Column(db.Integer, nullable=False)
+    quantity_in_cart = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
@@ -40,6 +41,7 @@ class Product(db.Model):
             'cover_img_url': self.cover_img_url,
             'price': self.price,
             'stock_quantity': self.stock_quantity,
+            'quantity_in_cart': self.quantity_in_cart,
             'medias': [media.to_dict() for media in self.medias],
             'created_at': self.created_at,
             'updated_at': self.updated_at,

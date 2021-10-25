@@ -83,7 +83,7 @@ export const addProductToCartThunk = cartDetails => async (dispatch) => {
 
 export const editQuantityOfProductThunk = cartDetails => async (dispatch) => {
     // console.log('===========@@@@@=======> edit running', cartDetails)
-    const response = await fetch(`/api/carts/edit/${cartDetails.id}`, {
+    const response = await fetch(`/api/carts/edit/${cartDetails.id}/${cartDetails.quantity}`, {
         method: 'PATCH',
         headers: {
             'Content-Type':'application/json'
@@ -99,7 +99,7 @@ export const editQuantityOfProductThunk = cartDetails => async (dispatch) => {
 
 
 export const deleteProductFromCartThunk = cartDetails => async (dispatch) => {
-    const response = await fetch(`/api/carts/delete/${cartDetails.id}/${cartDetails.quantity}`)
+    const response = await fetch(`/api/carts/delete/${cartDetails.id}`)
     if (response.ok) {
         const cartObj = await response.json();
         dispatch(deleteProductFromCart(cartObj))
@@ -119,7 +119,7 @@ const cartReducer = (state = initialState, action) => {
             return newState
         case CART_DETAILS:
             newState.cart = action.cartObj.cart
-            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
+            newState.productQuantities = action.cartObj.quantityObj
             return newState
         case ADD_PRODUCT_TO_CART:
             newState.cart[action.cartObj.cart.id] = action.cartObj
@@ -130,7 +130,8 @@ const cartReducer = (state = initialState, action) => {
             newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity
             return newState
         case DELETE_PRODUCT_FROM_CART:
-            delete newState.cart[action.cartObj.cart.id]
+            newState.cart = action.cartObj.cart
+            // delete newState.cart.products[action.cartObj.productId]
             delete newState.productQuantities[action.cartObj.productId]
 
             return newState
