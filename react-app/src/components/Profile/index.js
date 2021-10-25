@@ -29,7 +29,7 @@ export const Profile = () => {
     useEffect(() => {
         dispatch(getAllProducts())
         // dispatch(getAllMedias())
-    }, [dispatch])
+    }, [dispatch, allProductsList])
 
 
 
@@ -53,13 +53,13 @@ export const Profile = () => {
             // image2,
             // image3
         };
-        console.log('===========@@@@@@>', payload)
         dispatch(createProduct(payload))
         setModalIsOpen(false)
     }
 
     const handleDelete = async(e) => {
-        e.preventDefault();
+        console.log('===========@@@@@@>', e.target.value)
+        // e.preventDefault();
         dispatch(deleteOneProduct(e.target.value))
     }
 

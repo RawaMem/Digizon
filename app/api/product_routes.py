@@ -25,7 +25,9 @@ def get_one_product(id):
 # delete a single product
 @product_routes.route('/delete/<int:id>')
 def delete(id):
+
     deleted_product = Product.query.filter(Product.id == id).first()
+    print(CBLUEBG, ' delete route running', deleted_product, CEND)
     db.session.delete(deleted_product)
     db.session.commit()
     return deleted_product.to_dict()
