@@ -107,28 +107,31 @@ export const deleteProductFromCartThunk = id => async (dispatch) => {
     }
 }
 
-
-const initialState = {cart:{}, productsInCart:{}}
+// {1:3:{product}}
+const initialState = {cart:{}, productsInCart:[]}
 
 const cartReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case GET_CART:
             newState.cart= action.cartObj
-            // newState.currentProduct= {}
+            newState.productsInCart = action.cartObj.products
             return newState
         case CART_DETAILS:
             newState.currentProduct = action.cartDetailsObj
             return newState
         case ADD_PRODUCT_TO_CART:
             newState[action.addedProductToCartObj.id] = action.addedProductToCartObj
+            newState.productsInCart = action.addedProductToCartObj.products
             return newState
         case EDIT_QUANTITY_OF_PRODUCT_IN_CART:
             newState.cart[action.edittedQuantityCartObj.id] = action.edittedQuantityCartObj
-            newState.currentProduct = action.edittedQuantityCartObj
+            newState.productsInCart = action.edittedQuantityCartObj.products
             return newState
         case DELETE_PRODUCT_FROM_CART:
             delete newState[action.deletedFromCartObj.id]
+            newState.productsInCart = action.deletedFromCartObj.products
+
             return newState
         default:
         return state
