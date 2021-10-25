@@ -21,6 +21,7 @@ class Cart(db.Model):
 
     user = db.relationship('User', uselist=False, back_populates='cart')
     products = db.relationship("Product", secondary=products_carts, back_populates="carts")
+    
 
 
 
@@ -30,7 +31,7 @@ class Cart(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'product_id': self.product_id,
+            'products': {product.id:product.to_dict() for product in self.products},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
