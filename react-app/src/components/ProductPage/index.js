@@ -96,7 +96,7 @@ export const ProductPage = () => {
                                     />
                                     <input
                                     type="textarea"
-                                    placeholder="Desciption"
+                                    placeholder="Description"
                                     required
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}

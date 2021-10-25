@@ -11,7 +11,7 @@ import { Modal } from '../Modal';
 export const Profile = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [name, setName] = useState('');
-    const [url, setUrl] = useState('');
+    const [cover_img_url, setCover_img_url] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [stock_quantity, setStock_quantity] = useState('');
@@ -28,7 +28,7 @@ export const Profile = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-        dispatch(getAllMedias())
+        // dispatch(getAllMedias())
     }, [dispatch])
 
 
@@ -45,8 +45,8 @@ export const Profile = () => {
         const payload = {
             user_id: user.id,
             name,
-            url,
             description,
+            cover_img_url,
             price,
             stock_quantity
             // image,
@@ -80,10 +80,10 @@ export const Profile = () => {
                                 />
                                 <input
                                 type="text"
-                                placeholder="URL"
+                                placeholder="Cover Image URL"
                                 required
-                                value={url}
-                                onChange={e => setUrl(e.target.value)}
+                                value={cover_img_url}
+                                onChange={e => setCover_img_url(e.target.value)}
                                 />
                                 <input
                                 type="textarea"
