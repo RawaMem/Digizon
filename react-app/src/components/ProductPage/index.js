@@ -16,8 +16,8 @@ export const ProductPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
     // const product = useSelector(state => state?.products?.currentProduct)
-    const cart = useSelector(state => state?.products?.cart)
-    const allProductsObj = useSelector(state => state?.products?.products)
+    const cart = useSelector(state => state?.cart)
+    const allProductsObj = useSelector(state => state?.products)
     const product = allProductsObj[productId]
 
 
@@ -33,11 +33,10 @@ export const ProductPage = () => {
     const [stock_quantity, setStock_quantity] = useState(product?.stock_quantity);
     const [addQuantity, setAddQuantity] = useState(1);
 
-    if (cart?.products === undefined) {
-        productsInCartList = [];
-    } else {
-        productsInCartList = Object.values(cart?.products)
-    }
+    const allProductsInCartList = Object.values(cart)
+    let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
+        return accum + ele.quantity_in_cart
+    }, 0)
 
 
     useEffect(() => {
@@ -48,7 +47,7 @@ export const ProductPage = () => {
         return dispatch(getProductDetails(productId))
     }, [dispatch, productsInCartList.length])
 
-    const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
+    // const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
     // const firstImg = productImgList[0]
 
 
@@ -118,7 +117,7 @@ export const ProductPage = () => {
 
                 </div>
                 <div className="cart-container">
-                    <p className="cart">Cart: {productsInCartList.length}</p>
+                    <p className="cart">Cart: {numberOfProductsInCart}</p>
                 </div>
 
             </div>
@@ -128,7 +127,7 @@ export const ProductPage = () => {
             <p className="product-price">${product?.price}</p>
             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
 
-
+            {cart[productId] === undefined ?
             <form onSubmit={handleAddToCart}>
                 <div className="add-to-cart-container">
                     <select value={addQuantity} onChange={(e) => setAddQuantity(e.target.value)}>
@@ -141,7 +140,10 @@ export const ProductPage = () => {
                     <button type='submit' className="add-to-cart-submit">Add To Cart</button>
 
                 </div>
-            </form>
+            </form> :
+            <div className="amount-already-in-cart-container">
+                <p className="already-in-cart">This item is already in your cart</p>
+            </div>}
 
 
 

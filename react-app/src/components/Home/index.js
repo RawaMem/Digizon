@@ -8,7 +8,7 @@ import './index.css'
 export const Home = () => {
     const dispatch = useDispatch();
 
-    const allProductsObj = useSelector(state => state?.products?.products)
+    const allProductsObj = useSelector(state => state?.products)
     const allProductsList = Object.values(allProductsObj)
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export const Home = () => {
                         {allProductsList?.map(product => {
                             return (
                                 <div className="product-card">
-                                    <Link className='product-card-link' to={`/products/${product.id}`}>
+                                    <Link className='product-card-link' to={`/products/${product?.id}`}>
                                         <div className="product-img-container">
                                             <img src={product?.cover_img_url} alt="" className="product-img" />
                                         </div>

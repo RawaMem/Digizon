@@ -148,6 +148,8 @@ export const deleteOneProduct = id => async (dispatch) => {
 
 
 
+
+
 const GET_CART = "cart/LOAD";
 const CART_DETAILS = "cart/DETAILS";
 const ADD_PRODUCT_TO_CART = "cart/ADD";
@@ -257,56 +259,78 @@ export const deleteProductFromCartThunk = (cartDetails) => async (dispatch) => {
 
 
 
-const initialState = {products:{}, currentProduct:{}, cart: {}, productQuantities: {}}
+// const initialState = {products:{}, currentProduct:{}, cart: {}, productQuantities: {}}
+
+// const productReducer = (state = initialState, action) => {
+//     let newState = {...state}
+//     switch (action.type) {
+//         case GET_PRODUCTS:
+//             newState.products= action.productsObj
+//             // newState.currentProduct= {}
+//             return newState
+//         case PRODUCT_DETAILS:
+//             newState.currentProduct = action.productDetailsObj
+//             return newState
+//         case ADD_PRODUCT:
+//             newState.products[action.newProductObj.id] = action.newProductObj
+//             newState.currentProduct = action.newProductObj
+//             return newState
+//         case EDIT_PRODUCT:
+//             newState.products[action.edittedProductObj.id] = action.edittedProductObj
+//             newState.currentProduct = action.edittedProductObj
+//             return newState
+//         case DELETE_PRODUCT:
+//             delete newState.products[action.deletedProductObj.id]
+//             return newState
+//         case GET_CART:
+//             newState.cart = action.cartObj.cart;
+//             newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
+//             return newState;
+//         case CART_DETAILS:
+//             newState.cart = action.cartObj.cart;
+//             newState.productQuantities = action.cartObj.quantityObj;
+//             return newState;
+//         case ADD_PRODUCT_TO_CART:
+//             newState.cart[action.cartObj.cart.id] = action.cartObj;
+//             newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
+//             newState.currentProduct = action.cartObj.product
+//             newState.products[action.cartObj.product.id] = action.cartObj.product
+//             return newState;
+//         case EDIT_QUANTITY_OF_PRODUCT_IN_CART:
+//             newState.cart[action.cartObj.cart.id] = action.cartObj;
+//             newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
+//             newState.currentProduct = action.cartObj.product
+//             newState.products[action.cartObj.product.id] = action.cartObj.product
+//             return newState;
+//         case DELETE_PRODUCT_FROM_CART:
+//             newState.cart = action.cartObj.cart;
+//             // delete newState.cart.products[action.cartObj.productId]
+//             delete newState.productQuantities[action.cartObj.productId];
+//             newState.currentProduct = action.cartObj.product
+//             newState.products[action.cartObj.product.id] = action.cartObj.product
+//             return newState;
+//         default:
+//         return state
+//     }
+// }
+
+const initialState = {}
 
 const productReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case GET_PRODUCTS:
-            newState.products= action.productsObj
-            // newState.currentProduct= {}
-            return newState
-        case PRODUCT_DETAILS:
-            newState.currentProduct = action.productDetailsObj
+            newState= action.productsObj
             return newState
         case ADD_PRODUCT:
-            newState.products[action.newProductObj.id] = action.newProductObj
-            newState.currentProduct = action.newProductObj
-            return newState
+            newState[action.newProductObj.id] = action.newProductObj
+              return newState
         case EDIT_PRODUCT:
-            newState.products[action.edittedProductObj.id] = action.edittedProductObj
-            newState.currentProduct = action.edittedProductObj
+            newState[action.edittedProductObj.id] = action.edittedProductObj
             return newState
         case DELETE_PRODUCT:
-            delete newState.products[action.deletedProductObj.id]
+            delete newState[action.deletedProductObj.id]
             return newState
-        case GET_CART:
-            newState.cart = action.cartObj.cart;
-            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
-            return newState;
-        case CART_DETAILS:
-            newState.cart = action.cartObj.cart;
-            newState.productQuantities = action.cartObj.quantityObj;
-            return newState;
-        case ADD_PRODUCT_TO_CART:
-            newState.cart[action.cartObj.cart.id] = action.cartObj;
-            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
-            newState.currentProduct = action.cartObj.product
-            newState.products[action.cartObj.product.id] = action.cartObj.product
-            return newState;
-        case EDIT_QUANTITY_OF_PRODUCT_IN_CART:
-            newState.cart[action.cartObj.cart.id] = action.cartObj;
-            newState.productQuantities[action.cartObj.productId] = action.cartObj.quantity;
-            newState.currentProduct = action.cartObj.product
-            newState.products[action.cartObj.product.id] = action.cartObj.product
-            return newState;
-        case DELETE_PRODUCT_FROM_CART:
-            newState.cart = action.cartObj.cart;
-            // delete newState.cart.products[action.cartObj.productId]
-            delete newState.productQuantities[action.cartObj.productId];
-            newState.currentProduct = action.cartObj.product
-            newState.products[action.cartObj.product.id] = action.cartObj.product
-            return newState;
         default:
         return state
     }
