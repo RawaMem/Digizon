@@ -1,0 +1,21 @@
+.products-in-cart-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.product-in-cart-row {
+    height: 250px;
+    width: 70vw;
+    display: flex;
+}
+
+.product-cart-img-container {
+    height: 150px;
+    width: 225px;
+
+}
+
+.product-cart-img {
+    width: 225px;
+}
