@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { ProductPage } from './components/ProductPage';
+import LoggedInNav from './components/LoggedInNavBar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,27 +30,33 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
+          <NavBar />
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
+          <NavBar />
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
+          <LoggedInNav />
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
+          <LoggedInNav />
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/profile/:profileId' exact={true} >
+          <LoggedInNav />
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path='/products/:productId' exact={true} >
+          <LoggedInNav />
           <ProductPage />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
+          <LoggedInNav />
           <Home />
         </ProtectedRoute>
       </Switch>
