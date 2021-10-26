@@ -17,6 +17,9 @@ export const ProductPage = () => {
     const user = useSelector(state => state?.session?.user)
     const product = useSelector(state => state?.products?.currentProduct)
     const cart = useSelector(state => state?.products?.cart)
+    const allProductsObj = useSelector(state => state?.products?.products)
+
+
     const medias = useSelector(state => state?.medias)
     const allMediasList = Object.values(medias)
     let productsInCartList = []
@@ -41,7 +44,7 @@ export const ProductPage = () => {
         dispatch(getProductDetails(productId))
         dispatch(getCartDetails(user?.id))
 
-        // dispatch(getAllMedias())
+        return dispatch(getProductDetails(productId))
     }, [dispatch, productsInCartList.length])
 
     const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)

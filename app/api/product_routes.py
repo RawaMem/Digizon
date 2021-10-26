@@ -128,9 +128,9 @@ def get_one_cart(id):
     workCart = cart.to_dict()
     print(CBLUEBG, 'get cart running', workCart, CEND)
     quantities = {}
-    if workCart['products']:
-        productsList = [workCart.products[key] for key in workCart.products]
-        quantities = {product.id: product.quantity_in_cart for product in productsList}
+    # if workCart['products']:
+        # productsList = [workCart.products[key] for key in workCart.products]
+        # quantities = {product.id: product.quantity_in_cart for product in productsList}
     return {"cart": cart.to_dict(), "quantityObj": quantities}
 
 
