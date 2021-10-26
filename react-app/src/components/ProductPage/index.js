@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getAllMedias, getMediaDetails } from '../../store/medias';
-import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails, getCartDetails, addProductToCartThunk } from '../../store/products';
+import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails} from '../../store/products';
+import { getCartDetails, addProductToCartThunk } from '../../store/cart'
 import { Modal } from '../Modal';
 // import './index.css'
 
@@ -11,7 +12,6 @@ import { Modal } from '../Modal';
 export const ProductPage = () => {
     const {productId} = useParams()
     const [modalIsOpen, setModalIsOpen] = useState(false)
-
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
@@ -117,7 +117,9 @@ export const ProductPage = () => {
 
                 </div>
                 <div className="cart-container">
-                    <p className="cart">Cart: {numberOfProductsInCart}</p>
+                    <Link className='product-cart-link' to={`/cart`}>
+                        <p className="cart">Cart: {numberOfProductsInCart}</p>
+                    </Link>
                 </div>
 
             </div>
@@ -142,7 +144,9 @@ export const ProductPage = () => {
                 </div>
             </form> :
             <div className="amount-already-in-cart-container">
-                <p className="already-in-cart">This item is already in your cart</p>
+                <Link className='product-cart-link' to={`/cart`}>
+                    <p className="already-in-cart">This item is already in your cart</p>
+                </Link>
             </div>}
 
 

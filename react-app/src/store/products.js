@@ -150,110 +150,110 @@ export const deleteOneProduct = id => async (dispatch) => {
 
 
 
-const GET_CART = "cart/LOAD";
-const CART_DETAILS = "cart/DETAILS";
-const ADD_PRODUCT_TO_CART = "cart/ADD";
-const EDIT_QUANTITY_OF_PRODUCT_IN_CART = "cart/EDIT";
-const DELETE_PRODUCT_FROM_CART = "cart/DELETE";
+// const GET_CART = "cart/LOAD";
+// const CART_DETAILS = "cart/DETAILS";
+// const ADD_PRODUCT_TO_CART = "cart/ADD";
+// const EDIT_QUANTITY_OF_PRODUCT_IN_CART = "cart/EDIT";
+// const DELETE_PRODUCT_FROM_CART = "cart/DELETE";
 
-const getCart = (cartObj) => {
-  return {
-    type: GET_CART,
-    cartObj,
-  };
-};
+// const getCart = (cartObj) => {
+//   return {
+//     type: GET_CART,
+//     cartObj,
+//   };
+// };
 
-const cartDetails = (cartObj) => {
-  return {
-    type: CART_DETAILS,
-    cartObj,
-  };
-};
+// const cartDetails = (cartObj) => {
+//   return {
+//     type: CART_DETAILS,
+//     cartObj,
+//   };
+// };
 
-const addProductToCart = (cartObj) => {
-  return {
-    type: ADD_PRODUCT_TO_CART,
-    cartObj,
-  };
-};
+// const addProductToCart = (cartObj) => {
+//   return {
+//     type: ADD_PRODUCT_TO_CART,
+//     cartObj,
+//   };
+// };
 
-const editQuantityOfProductInCart = (cartObj) => {
-  return {
-    type: EDIT_QUANTITY_OF_PRODUCT_IN_CART,
-    cartObj,
-  };
-};
+// const editQuantityOfProductInCart = (cartObj) => {
+//   return {
+//     type: EDIT_QUANTITY_OF_PRODUCT_IN_CART,
+//     cartObj,
+//   };
+// };
 
-const deleteProductFromCart = (cartObj) => {
-  return {
-    type: DELETE_PRODUCT_FROM_CART,
-    cartObj,
-  };
-};
+// const deleteProductFromCart = (cartObj) => {
+//   return {
+//     type: DELETE_PRODUCT_FROM_CART,
+//     cartObj,
+//   };
+// };
 
-export const getAllCarts = () => async (dispatch) => {
-  const response = await fetch("/api/carts");
-  if (response.ok) {
-    const cartObj = await response.json();
-    dispatch(getCart(cartObj));
-    return cartObj;
-  }
-};
+// export const getAllCarts = () => async (dispatch) => {
+//   const response = await fetch("/api/carts");
+//   if (response.ok) {
+//     const cartObj = await response.json();
+//     dispatch(getCart(cartObj));
+//     return cartObj;
+//   }
+// };
 
-export const getCartDetails = (id) => async (dispatch) => {
-  const response = await fetch(`/api/products/cart/${id}`);
-  if (response.ok) {
-    let cartObj = await response.json();
-    dispatch(cartDetails(cartObj));
-    return cartObj;
-  }
-};
+// export const getCartDetails = (id) => async (dispatch) => {
+//   const response = await fetch(`/api/products/cart/${id}`);
+//   if (response.ok) {
+//     let cartObj = await response.json();
+//     dispatch(cartDetails(cartObj));
+//     return cartObj;
+//   }
+// };
 
-export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
-  console.log('===========@@@@@=======> add to cart running', cartDetails)
-  const response = await fetch(
-    `/api/products/cart/add/${cartDetails.productId}/${cartDetails.quantity}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartDetails),
-    }
-  );
-  if (response.ok) {
-    const cartObj = await response.json();
-    dispatch(addProductToCart(cartObj));
-    return cartObj;
-  }
-};
+// export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
+//   console.log('===========@@@@@=======> add to cart running', cartDetails)
+//   const response = await fetch(
+//     `/api/products/cart/add/${cartDetails.productId}/${cartDetails.quantity}`,
+//     {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(cartDetails),
+//     }
+//   );
+//   if (response.ok) {
+//     const cartObj = await response.json();
+//     dispatch(addProductToCart(cartObj));
+//     return cartObj;
+//   }
+// };
 
-export const editQuantityOfProductThunk = (cartDetails) => async (dispatch) => {
-  const response = await fetch(
-    `/api/products/cart/edit/${cartDetails.id}/${cartDetails.quantity}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartDetails),
-    }
-  );
-  if (response.ok) {
-    const cartObj = await response.json();
-    dispatch(editQuantityOfProductInCart(cartObj));
-    return cartObj;
-  }
-};
+// export const editQuantityOfProductThunk = (cartDetails) => async (dispatch) => {
+//   const response = await fetch(
+//     `/api/products/cart/edit/${cartDetails.id}/${cartDetails.quantity}`,
+//     {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(cartDetails),
+//     }
+//   );
+//   if (response.ok) {
+//     const cartObj = await response.json();
+//     dispatch(editQuantityOfProductInCart(cartObj));
+//     return cartObj;
+//   }
+// };
 
-export const deleteProductFromCartThunk = (cartDetails) => async (dispatch) => {
-  const response = await fetch(`/api/products/cart/delete/${cartDetails.id}`);
-  if (response.ok) {
-    const cartObj = await response.json();
-    dispatch(deleteProductFromCart(cartObj));
-    return cartObj;
-  }
-};
+// export const deleteProductFromCartThunk = (cartDetails) => async (dispatch) => {
+//   const response = await fetch(`/api/products/cart/delete/${cartDetails.id}`);
+//   if (response.ok) {
+//     const cartObj = await response.json();
+//     dispatch(deleteProductFromCart(cartObj));
+//     return cartObj;
+//   }
+// };
 
 
 

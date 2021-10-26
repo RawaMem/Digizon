@@ -12,6 +12,7 @@ import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { ProductPage } from './components/ProductPage';
 import LoggedInNav from './components/LoggedInNavBar';
+import { Cart } from './components/cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +59,10 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <LoggedInNav />
           <Home />
+        </ProtectedRoute>
+        <ProtectedRoute path='/cart' exact={true} >
+          <LoggedInNav />
+          <Cart />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
