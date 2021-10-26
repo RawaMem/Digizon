@@ -78,7 +78,7 @@ export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
 
 export const editQuantityOfProductThunk = (cartDetails) => async (dispatch) => {
   const response = await fetch(
-    `/api/products/cart/edit/${cartDetails.id}/${cartDetails.quantity}`,
+    `/api/products/cart/edit/${cartDetails.productId}/${cartDetails.quantity}`,
     {
       method: "PATCH",
       headers: {
