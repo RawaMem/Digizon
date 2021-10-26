@@ -15,9 +15,10 @@ export const ProductPage = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const product = useSelector(state => state?.products?.currentProduct)
+    // const product = useSelector(state => state?.products?.currentProduct)
     const cart = useSelector(state => state?.products?.cart)
     const allProductsObj = useSelector(state => state?.products?.products)
+    const product = allProductsObj[productId]
 
 
     const medias = useSelector(state => state?.medias)
