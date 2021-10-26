@@ -148,8 +148,6 @@ export const deleteOneProduct = id => async (dispatch) => {
 
 
 
-
-
 const GET_CART = "cart/LOAD";
 const CART_DETAILS = "cart/DETAILS";
 const ADD_PRODUCT_TO_CART = "cart/ADD";

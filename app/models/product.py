@@ -42,7 +42,7 @@ class Product(db.Model):
             'price': self.price,
             'stock_quantity': self.stock_quantity,
             'quantity_in_cart': self.quantity_in_cart,
-            'medias': [media.to_dict() for media in self.medias],
+            # 'medias': [media.to_dict() for media in self.medias],
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
