@@ -113,6 +113,74 @@ def add_new_media():
 
 
 
+# # get all carts for a user
+# @product_routes.route('/cart/')
+# def get_carts():
+#     carts = Cart.query.all()
+#     return {cart.id:cart.to_dict() for cart in carts}
+
+
+# # get single cart
+# @product_routes.route('/cart/<int:id>')
+# def get_one_cart(id):
+
+#     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+#     workCart = cart.to_dict()
+#     print(CBLUEBG, 'get cart running', workCart, CEND)
+#     quantities = {}
+#     # if workCart['products']:
+#         # productsList = [workCart.products[key] for key in workCart.products]
+#         # quantities = {product.id: product.quantity_in_cart for product in productsList}
+#     return {"cart": cart.to_dict(), "quantityObj": quantities}
+
+
+# # delete a product from cart
+# @product_routes.route('/cart/delete/<int:productId>')
+# def delete_product_from_cart(productId):
+#     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+#     product = Product.query.filter(Product.id == productId).first()
+#     del cart.products[id]
+#     product.quantity_in_cart = 0
+#     db.session.add(product)
+#     db.session.add(cart)
+#     db.session.commit()
+#     return {"cart": cart.to_dict(), "productId": productId, 'product': product.to_dict()}
+
+
+# # add product to cart
+# @product_routes.route('/cart/add/<int:productId>/<int:quantity>', methods=['POST'])
+# def add_new_product_to_cart(productId, quantity):
+#     print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
+#     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+#     product = Product.query.filter(Product.id == productId).first()
+#     product.quantity_in_cart = quantity
+#     cart.products.append(product)
+#     db.session.add(product)
+#     db.session.add(cart)
+#     db.session.commit()
+
+#     return {"cart": cart.to_dict(), "productId": productId, "quantity": quantity, 'product': product.to_dict()}
+
+
+
+
+# # Edit Quantity Of Product In Cart
+# @product_routes.route('/cart/edit/<int:productId>/<int:quantity>', methods=['PATCH'])
+# def edit_quantity_of_product(productId, quantity):
+#     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+#     product = Product.query.filter(Product.id == productId).first()
+#     product.quantity_in_cart = quantity
+#     cart.products[product.id] = product
+#     db.session.add(product)
+#     db.session.add(cart)
+#     db.session.commit()
+#     return {"cart": cart.to_dict(), "productId": productId, "quantity": quantity, 'product': product.to_dict()}
+
+
+
+
+
+
 # get all carts for a user
 @product_routes.route('/cart/')
 def get_carts():
@@ -123,15 +191,10 @@ def get_carts():
 # get single cart
 @product_routes.route('/cart/<int:id>')
 def get_one_cart(id):
-
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    workCart = cart.to_dict()
-    print(CBLUEBG, 'get cart running', workCart, CEND)
-    quantities = {}
-    # if workCart['products']:
-        # productsList = [workCart.products[key] for key in workCart.products]
-        # quantities = {product.id: product.quantity_in_cart for product in productsList}
-    return {"cart": cart.to_dict(), "quantityObj": quantities}
+    print(CBLUEBG, 'get cart running', cart.to_dict(), CEND)
+
+    return cart.to_dict()
 
 
 # delete a product from cart
@@ -139,12 +202,12 @@ def get_one_cart(id):
 def delete_product_from_cart(productId):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
-    del cart.products[id]
+    cart.products.remove(product)
     product.quantity_in_cart = 0
     db.session.add(product)
     db.session.add(cart)
     db.session.commit()
-    return {"cart": cart.to_dict(), "productId": productId, 'product': product.to_dict()}
+    return cart.to_dict()
 
 
 # add product to cart
@@ -158,8 +221,7 @@ def add_new_product_to_cart(productId, quantity):
     db.session.add(product)
     db.session.add(cart)
     db.session.commit()
-
-    return {"cart": cart.to_dict(), "productId": productId, "quantity": quantity, 'product': product.to_dict()}
+    return cart.to_dict()
 
 
 
@@ -167,11 +229,11 @@ def add_new_product_to_cart(productId, quantity):
 # Edit Quantity Of Product In Cart
 @product_routes.route('/cart/edit/<int:productId>/<int:quantity>', methods=['PATCH'])
 def edit_quantity_of_product(productId, quantity):
-    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     product.quantity_in_cart = quantity
-    cart.products[product.id] = product
+    # cart.products[product.id] = product
     db.session.add(product)
-    db.session.add(cart)
     db.session.commit()
-    return {"cart": cart.to_dict(), "productId": productId, "quantity": quantity, 'product': product.to_dict()}
+    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    # db.session.add(cart)
+    return cart.to_dict()

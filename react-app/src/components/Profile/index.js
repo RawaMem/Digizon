@@ -21,7 +21,7 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const allProductsObj = useSelector(state => state?.products?.products)
+    const allProductsObj = useSelector(state => state?.products)
     const allProductsList = Object.values(allProductsObj)
     const medias = useSelector(state => state?.medias)
 
@@ -43,7 +43,7 @@ export const Profile = () => {
         e.preventDefault();
 
         const payload = {
-            user_id: user.id,
+            user_id: user?.id,
             name,
             description,
             cover_img_url,
@@ -144,9 +144,9 @@ export const Profile = () => {
             <div className="user-listed-products">
             {allProductsList?.map(product => {
                     return (
-                        product.user_id === user.id ? (
+                        product.user_id === user?.id ? (
                         <div className="product-card">
-                            <Link className='product-card-link' to={`/products/${product.id}`}>
+                            <Link className='product-card-link' to={`/products/${product?.id}`}>
                                 <div className="product-img-container">
                                     <img src={product?.cover_img_url} alt="" className="product-img" />
                                 </div>
@@ -155,7 +155,7 @@ export const Profile = () => {
                             <p className="product-description">{product?.description}</p>
                             <p className="product-price">${product?.price}</p>
                             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
-                            <button value={product.id} onClick={handleDelete} className="product-delete">Delete Product</button>
+                            <button value={product?.id} onClick={handleDelete} className="product-delete">Delete Product</button>
 
                         </div>
                         ) : false
