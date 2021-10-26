@@ -2,8 +2,9 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCartDetails } from '../../store/cart';
+import { deleteProductFromCartThunk, getCartDetails } from '../../store/cart';
 import { getAllProducts, getProductDetails } from '../../store/products';
+import { CartEdit } from '../CartEdit';
 import './style.css'
 
 
@@ -20,7 +21,30 @@ export const Cart = () => {
         return accum + ele.quantity_in_cart
     }, 0)
 
+    // const [edittedQuantity, setEdittedQuantity] = useState();
+
+
     let productsInCartList = []
+
+
+
+    let stockQuantity = []
+    allProductsInCartList.forEach(product => {
+        let tempArr = []
+        for (let i = 1; i <= product?.stock_quantity; i++) {
+            tempArr.push(i)
+        }
+        stockQuantity.push(tempArr)
+    })
+
+    const handleRemoveFromCart = async(e) => {
+        e.preventDefault();
+        const payload = {
+            productId: e.target.id
+        };
+        // console.log('=========@@@@@>', payload)
+        dispatch(deleteProductFromCartThunk(payload))
+    }
 
 
     useEffect(() => {
@@ -30,12 +54,14 @@ export const Cart = () => {
     }, [dispatch, productsInCartList.length])
 
 
+
+
     return(
 
         <div className="cart-page-container">
             <h3 className="cart-title">Cart</h3>
             <div className="products-in-cart-container">
-                {allProductsInCartList.map(product => {
+                {allProductsInCartList.map((product, i) => {
                     return(
                         <div className="product-in-cart-row">
                             <div className="product-cart-img-container">
@@ -50,7 +76,23 @@ export const Cart = () => {
                                 <p className="product-description">{product?.description}</p>
                             </div>
                             <div className="product-cart-edit-container">
+                                <CartEdit product={product} />
+                                {/* <form onSubmit={handleEditQunatity}>
+                                    <div className="edit-quantity-container">
+                                        <select value={product.quantity_in_cart} onChange={(e) => setAddQuantity(e.target.value)}>
+                                            {stockQuantity?.map(quantity => {
+                                                return (
+                                                    <option value={quantity}>{quantity}</option>
+                                                )
+                                            })}
+                                        </select>
+                                        <button type='submit' className="add-to-cart-submit">Edit Quantity</button>
 
+                                    </div>
+                                </form> */}
+                            </div>
+                            <div className="delete-btn-container">
+                                <button className="cart-product-delete-btn" id={product.id} onClick={handleRemoveFromCart}>Remove Product</button>
                             </div>
                         </div>
                     )

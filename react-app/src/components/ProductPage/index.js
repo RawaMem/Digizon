@@ -79,7 +79,7 @@ export const ProductPage = () => {
             productId: product.id,
             quantity: addQuantity
         };
-        console.log('=========@@@@@>', payload)
+        // console.log('=========@@@@@>', payload)
         dispatch(addProductToCartThunk(payload))
     }
 
