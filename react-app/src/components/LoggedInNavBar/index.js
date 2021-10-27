@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { refreshUserThunk } from '../../store/session';
+import './style.css'
 
 
 
@@ -31,7 +32,7 @@ export default function LoggedInNav() {
         <div className="navbar-container">
             <div className="left-container">
                 <Link to='/' exact={true}>
-                    Home
+                    <button className="navbar-btn home-btn">Home</button>
                 </Link>
             </div>
             {/* <div className="searchbar-container">
@@ -40,13 +41,14 @@ export default function LoggedInNav() {
             </div> */}
             <div className="right-container">
                 <Link to={`/profile/${user?.id}`} exact={true}>
-                    Profile
+                    <button className="navbar-btn btn-margin-right">Profile</button>
                 </Link>
-                <p className="user-balance">Your balance: {user?.balance}</p>
                 <div className="cart-container">
                     <Link className='product-cart-link' to={`/cart`}>
-                        <p className="cart">Cart: {numberOfProductsInCart}</p>
+                        <img src="https://www.pinclipart.com/picdir/big/485-4857762_png-file-svg-transparent-shopping-cart-icon-clipart.png" alt="" className="cart-img cart-margin-right" />
+                        <p className="cart-number btn-margin-right">{numberOfProductsInCart}</p>
                     </Link>
+                    <p className="user-balance btn-margin-right">Your Balance: {user?.balance}</p>
                 </div>
                 <LogoutButton />
             </div>
