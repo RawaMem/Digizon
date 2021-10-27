@@ -6,6 +6,7 @@ import { getAllMedias, getMediaDetails } from '../../store/medias';
 import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails} from '../../store/products';
 import { getCartDetails, addProductToCartThunk } from '../../store/cart'
 import { Modal } from '../Modal';
+import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 // import './index.css'
 
 
@@ -18,8 +19,12 @@ export const ProductPage = () => {
     // const product = useSelector(state => state?.products?.currentProduct)
     const cart = useSelector(state => state?.cart)
     const allProductsObj = useSelector(state => state?.products)
-    const product = allProductsObj[productId]
+    const allReviewsObj = useSelector(state => state?.reviews)
+    const allReviewsList = Object.values(allReviewsObj)
+    const userId = user?.id
 
+
+    const product = allProductsObj[productId]
 
     const medias = useSelector(state => state?.medias)
     const allMediasList = Object.values(medias)
@@ -43,6 +48,7 @@ export const ProductPage = () => {
         dispatch(getAllProducts())
         dispatch(getProductDetails(productId))
         dispatch(getCartDetails(user?.id))
+        dispatch(getAllReviewsThunk())
 
         return dispatch(getProductDetails(productId))
     }, [dispatch, productsInCartList.length])
@@ -102,6 +108,11 @@ export const ProductPage = () => {
         };
         dispatch(editProductDetails(payload))
         setModalIsOpen(false)
+    }
+
+    const deleteThisReview = (e) => {
+        e.preventDefault();
+        dispatch(deleteReviewThunk(e.target.value));
     }
 
 
@@ -225,6 +236,30 @@ export const ProductPage = () => {
                     </Modal>
                 </>
                 )}
+                <div className="review-container">
+                    {allReviewsList.map(review => {
+                            return (
+                                +review?.product_id === +product?.id ? (
+                                    <>
+                                    <div className="r-container">
+                                        <div className="review-username"><p>{review?.username}</p></div>
+                                        <div className="rating"><p>Rating: <span className='review-rating-number'>{review.rating}</span></p></div>
+                                        <div className="content"><p>{review.content}</p></div>
+                                        {userId && userId === review?.user_id &&
+                                        // (<Link to={`/businesses/${businessId}/reviews/${review?.id}/edit`}>
+                                        <button value={review.id} className="review-edit-btn">Edit</button>
+                                        // </Link>)
+                                        }
+                                        {userId && userId === review?.user_id &&
+                                        (<button value={review.id} className="review-delete-btn" onClick={deleteThisReview}>Delete</button>)
+                                        }
+                                    </div>
+                                </>
+                                ) : false
+                                )
+                            })}
+
+                </div>
                 </>
             {/* )} */}
         </div>

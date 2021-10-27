@@ -4,11 +4,11 @@ from app.models.review import Review
 
 def seed_reviews():
     review1 = Review(
-        user_id=3, product_id=3, content='I love the switch! it so portable!')
+        user_id=3, username='bobbie', product_id=3, rating=3, content='I love the switch! it so portable!')
     review2 = Review(
-        user_id=1, product_id=2, content='I love the console exclusives!')
+        user_id=1, username='Demo', product_id=2, rating=4, content='I love the console exclusives!')
     review3 = Review(
-        user_id=2, product_id=1, content='Game Pass is amazing!')
+        user_id=2, username='marnie', product_id=1, rating=5, content='Game Pass is amazing!')
 
     db.session.add(review1)
     db.session.add(review2)
