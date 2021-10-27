@@ -1,0 +1,95 @@
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+
+}
+
+.digizon-login-logo {
+    font-size: 3em;
+    color: teal;
+}
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 300px;
+    width: 296px; */
+    padding: 20px 26px;
+    border-radius: 4px;
+    border: 1px solid rgb(17, 17, 17);
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+.login-input {
+    height: 25px;
+    width: 296px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid rgb(166, 166, 166);
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+
+
+.user-login-btn {
+    background-color: teal;
+    height: 34px;
+    width: 312px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid teal;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: white;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100vw;
+    border-top: 1px solid grey;
+}
+
+
+.btn-to-signup {
+    background-color: teal;
+    height: 34px;
+    width: 350px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid teal;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    color: white;
+}
+
+.social-link-img {
+    height: 30px;
+    width: 30px;
+    margin: 25px;
+}
+
+.line {
+    border: none;
+    border-top: 1px solid #ccc;
+    width: 325px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+.new-to-digizon {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
