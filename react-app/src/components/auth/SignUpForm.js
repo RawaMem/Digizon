@@ -64,9 +64,9 @@ const SignUpForm = () => {
           ))}
         </div>
         <div>
-          <div className="login-label-container">
+          {/* <div className="login-label-container">
             <label htmlFor='first_name'>First Name</label>
-          </div>
+          </div> */}
           <input
             type='text'
             className='login-input'
@@ -77,9 +77,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <div className="login-label-container">
+          {/* <div className="login-label-container">
             <label htmlFor='last_name'>Last Name</label>
-          </div>
+          </div> */}
           <input
             type='text'
             className='login-input'
@@ -90,9 +90,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <div className="login-label-container">
+          {/* <div className="login-label-container">
             <label htmlFor='username'>User Name</label>
-          </div>
+          </div> */}
           <input
             type='text'
             className='login-input'
@@ -103,9 +103,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <div className="login-label-container">
+          {/* <div className="login-label-container">
             <label htmlFor='email'>Email</label>
-          </div>
+          </div> */}
           <input
             type='text'
             className='login-input'
@@ -116,9 +116,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <div className="login-label-container">
-          <label htmlFor='password'>Password</label>
-          </div>
+          {/* <div className="login-label-container">
+            <label htmlFor='password'>Password</label>
+          </div> */}
           <input
             type='password'
             className='login-input'
@@ -129,9 +129,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <div className="login-label-container">
-          <label htmlFor='repeat_password'>Repeat Password</label>
-          </div>
+          {/* <div className="login-label-container">
+            <label htmlFor='repeat_password'>Repeat Password</label>
+          </div> */}
           <input
             type='password'
             className='login-input'
