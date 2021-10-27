@@ -43,6 +43,14 @@ export const ProductPage = () => {
         return accum + ele.quantity_in_cart
     }, 0)
 
+    let reviewSum = 0;
+    allReviewsList?.forEach(review => {
+        console.log('==========@@@@@===>', review.product_id === productId)
+        if (review?.product_id === productId) {
+            reviewSum = reviewSum + review?.rating
+    }});
+    let aveRating = Math.round((reviewSum / allReviewsList?.length) *10) /10
+
 
     useEffect(() => {
         dispatch(getAllProducts())
@@ -51,7 +59,7 @@ export const ProductPage = () => {
         dispatch(getAllReviewsThunk())
 
         return dispatch(getProductDetails(productId))
-    }, [dispatch, productsInCartList.length])
+    }, [dispatch, productsInCartList.length, aveRating])
 
     // const productImgList = allMediasList?.filter(media => media?.product_id === product?.id)
     // const firstImg = productImgList[0]
@@ -138,6 +146,7 @@ export const ProductPage = () => {
             <img src={product?.cover_img_url} alt="" className="product-img" />
             <p className="product-description">{product?.description}</p>
             <p className="product-price">${product?.price}</p>
+            <p className="product-average-score">Average review score: {aveRating}</p>
             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
 
             {cart[productId] === undefined ?
