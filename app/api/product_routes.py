@@ -25,9 +25,8 @@ def get_one_product(id):
 # delete a single product
 @product_routes.route('/delete/<int:id>')
 def delete(id):
-
     deleted_product = Product.query.filter(Product.id == id).first()
-    print(CBLUEBG, ' delete route running', deleted_product, CEND)
+    # print(CBLUEBG, ' delete route running', deleted_product, CEND)
     db.session.delete(deleted_product)
     db.session.commit()
     return deleted_product.to_dict()
@@ -39,7 +38,7 @@ def add_new_product():
     form = NewProductForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        print(CBLUEBG, ' create new product form validate is working', CEND)
+        # print(CBLUEBG, ' create new product form validate is working', CEND)
         new_product = Product(
             user_id=form.data['user_id'],
             name=form.data['name'],
