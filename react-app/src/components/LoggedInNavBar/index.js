@@ -34,10 +34,10 @@ export default function LoggedInNav() {
                     Home
                 </Link>
             </div>
-            <div className="searchbar-container">
+            {/* <div className="searchbar-container">
                 <input type="text" className="search-bar" placeholder='Search'/>
                 <button className="search-btn">Search</button>
-            </div>
+            </div> */}
             <div className="right-container">
                 <Link to={`/profile/${user?.id}`} exact={true}>
                     Profile

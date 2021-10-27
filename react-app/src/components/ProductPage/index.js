@@ -135,18 +135,18 @@ export const ProductPage = () => {
                 <div className="searchbar-container">
 
                 </div>
-                <div className="cart-container">
+                {/* <div className="cart-container">
                     <Link className='product-cart-link' to={`/cart`}>
                         <p className="cart">Cart: {numberOfProductsInCart}</p>
                     </Link>
-                </div>
+                </div> */}
 
             </div>
             <h1 className="product-name">{product?.name}</h1>
             <img src={product?.cover_img_url} alt="" className="product-img" />
             <p className="product-description">{product?.description}</p>
             <p className="product-price">${product?.price}</p>
-            <p className="product-average-score">Average review score: {aveRating}</p>
+            {/* <p className="product-average-score">Average review score: {aveRating}</p> */}
             <p className="product-stock">In Stock: {product?.stock_quantity}</p>
 
             {cart[productId] === undefined ?
@@ -245,7 +245,7 @@ export const ProductPage = () => {
                     </Modal>
                 </>
                 )}
-                <div className="review-container">
+                {/* <div className="review-container">
                     {allReviewsList.map(review => {
                             return (
                                 +review?.product_id === +product?.id ? (
@@ -268,7 +268,7 @@ export const ProductPage = () => {
                                 )
                             })}
 
-                </div>
+                </div> */}
                 </>
             {/* )} */}
         </div>
