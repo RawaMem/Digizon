@@ -32,6 +32,7 @@ export default function LoggedInNav() {
                 <Link to={`/profile/${user?.id}`} exact={true}>
                     Profile
                 </Link>
+                <p className="user-balance">Your balance: {user?.balance}</p>
                 <div className="cart-container">
                     <Link className='product-cart-link' to={`/cart`}>
                         <p className="cart">Cart: {numberOfProductsInCart}</p>

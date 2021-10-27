@@ -1,5 +1,6 @@
 // constants
 const SET_USER = "session/SET_USER";
+const REFRESH_USER = "session/REFRESH";
 const REMOVE_USER = "session/REMOVE_USER";
 
 const setUser = (user) => ({
@@ -7,11 +8,27 @@ const setUser = (user) => ({
   payload: user,
 });
 
+const refreshUser = (user) => ({
+  type: REFRESH_USER,
+  payload: user,
+});
+
+
 const removeUser = () => ({
   type: REMOVE_USER,
 });
 
 const initialState = { user: null };
+
+export const refreshUserThunk = () => async (dispatch) => {
+  console.log('==========@@@@@@===> user refresh thunk running')
+  const response = await fetch("/api/auth/refresh");
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(refreshUser(data));
+  }
+};
+
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch("/api/auth/", {
@@ -100,6 +117,8 @@ export const signUp =
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
+      return { user: action.payload };
+    case REFRESH_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
