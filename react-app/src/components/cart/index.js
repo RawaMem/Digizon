@@ -38,6 +38,7 @@ export const Cart = () => {
     })
 
     const handleRemoveFromCart = async(e) => {
+        console.log('===========@@@@@@==>', e.target.id)
         e.preventDefault();
         const payload = {
             productId: e.target.id
@@ -92,7 +93,7 @@ export const Cart = () => {
                                 </form> */}
                             </div>
                             <div className="delete-btn-container">
-                                <button className="cart-product-delete-btn" id={product.id} onClick={handleRemoveFromCart}>Remove Product</button>
+                                <button className="cart-product-delete-btn" id={product?.id} onClick={handleRemoveFromCart}>Remove Product</button>
                             </div>
                         </div>
                     )
