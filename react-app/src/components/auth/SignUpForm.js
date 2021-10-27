@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -53,69 +53,118 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className="login-page-container">
+      <h1 className="digizon-login-logo">Digizon</h1>
+      <div className="login-form-container">
+      <form onSubmit={onSignUp}>
+        <h2 className="signin-text">Sign-Up</h2>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <div>
+          <div className="login-label-container">
+            <label htmlFor='first_name'>First Name</label>
+          </div>
+          <input
+            type='text'
+            className='login-input'
+            name='first_name'
+            placeholder='First Name'
+            onChange={updateFirst_name}
+            value={first_name}
+          ></input>
+        </div>
+        <div>
+          <div className="login-label-container">
+            <label htmlFor='last_name'>Last Name</label>
+          </div>
+          <input
+            type='text'
+            className='login-input'
+            name='last_name'
+            placeholder='Last Name'
+            onChange={updateLast_name}
+            value={last_name}
+          ></input>
+        </div>
+        <div>
+          <div className="login-label-container">
+            <label htmlFor='username'>User Name</label>
+          </div>
+          <input
+            type='text'
+            className='login-input'
+            name='username'
+            placeholder='Username'
+            onChange={updateUsername}
+            value={username}
+          ></input>
+        </div>
+        <div>
+          <div className="login-label-container">
+            <label htmlFor='email'>Email</label>
+          </div>
+          <input
+            type='text'
+            className='login-input'
+            name='email'
+            placeholder='Email'
+            onChange={updateEmail}
+            value={email}
+          ></input>
+        </div>
+        <div>
+          <div className="login-label-container">
+          <label htmlFor='password'>Password</label>
+          </div>
+          <input
+            type='password'
+            className='login-input'
+            name='password'
+            placeholder='Password'
+            onChange={updatePassword}
+            value={password}
+          ></input>
+        </div>
+        <div>
+          <div className="login-label-container">
+          <label htmlFor='repeat_password'>Repeat Password</label>
+          </div>
+          <input
+            type='password'
+            className='login-input'
+            name='repeat_password'
+            placeholder='Repeat Password to Confirm'
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          ></input>
+        </div>
+        <button type='submit' className='user-login-btn'>Sign Up</button>
+      </form>
       </div>
-      <div>
-        <label>First Name</label>
-        <input
-          type='text'
-          name='first_name'
-          onChange={updateFirst_name}
-          value={first_name}
-        ></input>
+      <fieldset className='line'>
+        <legend className='new-to-digizon'>Already have a Digizon Account?</legend>
+      </fieldset>
+      <div className="btn-to-signup-container">
+        <Link to='/login' exact={true}>
+          <button className="btn-to-signup">Log in to your Digizon Account</button>
+        </Link>
       </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type='text'
-          name='last_name'
-          onChange={updateLast_name}
-          value={last_name}
-        ></input>
+      <div className="footer-container">
+        <p className="about-me"> Designed by Rawaha Memon</p>
+        <div className="personal-link-container">
+          <a href="https://github.com/RawaMem" target="_blank" className="social-link">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
+          </a>
+          <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank" className="social-link">
+            <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
+          </a>
+        </div>
       </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+  </div>
   );
 };
 
