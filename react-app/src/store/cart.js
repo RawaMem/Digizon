@@ -113,7 +113,7 @@ export const deleteProductFromCartThunk = (cartDetails) => async (dispatch) => {
 
 
 export const purchaseProductsFromCartThunk = () => async (dispatch) => {
-  console.log('===========@@@@@=======> purchase thunk running')
+//   console.log('===========@@@@@=======> purchase thunk running')
   const response = await fetch(`/api/products/cart/purchase`);
   if (response.ok) {
     const cartObj = await response.json();

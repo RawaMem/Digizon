@@ -1,12 +1,14 @@
 import React from 'react';
 import LogoutButton from '../auth/LogoutButton';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { refreshUserThunk } from '../../store/session';
 
 
 
 export default function LoggedInNav() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
     const cart = useSelector(state => state?.cart)
 
@@ -15,6 +17,14 @@ export default function LoggedInNav() {
     let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
         return accum + ele.quantity_in_cart
     }, 0)
+
+    const userBalance = user?.balance
+
+    useEffect(() => {
+        dispatch(refreshUserThunk())
+
+
+    }, [dispatch, numberOfProductsInCart])
 
 
     return(

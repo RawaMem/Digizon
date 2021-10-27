@@ -29,7 +29,9 @@ export const Profile = () => {
     useEffect(() => {
         dispatch(getAllProducts())
         // dispatch(getAllMedias())
-    }, [dispatch, allProductsList])
+    }, [dispatch])
+    //was getting stack overflow on profile page but it stopped when I deleted allProductsList from
+    //useEffect dependancy array
 
 
 
