@@ -3,6 +3,7 @@ const CART_DETAILS = "cart/DETAILS";
 const ADD_PRODUCT_TO_CART = "cart/ADD";
 const EDIT_QUANTITY_OF_PRODUCT_IN_CART = "cart/EDIT";
 const DELETE_PRODUCT_FROM_CART = "cart/DELETE";
+const PURCHASE_CART = "cart/PURCHASE";
 
 const getCart = (cartObj) => {
   return {
@@ -39,6 +40,13 @@ const deleteProductFromCart = (cartObj) => {
   };
 };
 
+const purchaseFromCart = (cartObj) => {
+  return {
+    type: PURCHASE_CART,
+    cartObj,
+  };
+};
+
 export const getAllCarts = () => async (dispatch) => {
   const response = await fetch("/api/products/carts/");
   if (response.ok) {
@@ -58,7 +66,7 @@ export const getCartDetails = (id) => async (dispatch) => {
 };
 
 export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
-  console.log('===========@@@@@=======> add to cart running', cartDetails)
+//   console.log('===========@@@@@=======> add to cart running', cartDetails)
   const response = await fetch(
     `/api/products/cart/add/${cartDetails.productId}/${cartDetails.quantity}`,
     {
@@ -104,6 +112,17 @@ export const deleteProductFromCartThunk = (cartDetails) => async (dispatch) => {
 };
 
 
+export const purchaseProductsFromCartThunk = () => async (dispatch) => {
+  console.log('===========@@@@@=======> purchase thunk running')
+  const response = await fetch(`/api/products/cart/purchase`);
+  if (response.ok) {
+    const cartObj = await response.json();
+    dispatch(purchaseFromCart(cartObj));
+    return cartObj;
+  }
+};
+
+
 
 const initialState = {}
 
@@ -123,6 +142,9 @@ const cartReducer = (state = initialState, action) => {
             newState = action.cartObj.productsObjForState;
             return newState;
         case DELETE_PRODUCT_FROM_CART:
+            newState = action.cartObj.productsObjForState;
+            return newState;
+        case PURCHASE_CART:
             newState = action.cartObj.productsObjForState;
             return newState;
         default:

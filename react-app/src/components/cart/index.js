@@ -2,8 +2,9 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteProductFromCartThunk, getCartDetails } from '../../store/cart';
+import { deleteProductFromCartThunk, getCartDetails, purchaseProductsFromCartThunk } from '../../store/cart';
 import { getAllProducts, getProductDetails } from '../../store/products';
+import { refreshUserThunk } from '../../store/session';
 import { CartEdit } from '../CartEdit';
 import './style.css'
 
@@ -48,10 +49,17 @@ export const Cart = () => {
     }
 
 
+    const handlePurchaseCart = async(e) => {
+        e.preventDefault();
+        console.log('===========@@@@@@==> purchase component function running')
+        dispatch(purchaseProductsFromCartThunk())
+        dispatch(refreshUserThunk())
+    }
+
+
     useEffect(() => {
         dispatch(getAllProducts())
         dispatch(getCartDetails(user?.id))
-
     }, [dispatch, productsInCartList.length])
 
 
@@ -60,7 +68,12 @@ export const Cart = () => {
     return(
 
         <div className="cart-page-container">
-            <h3 className="cart-title">Cart</h3>
+            <div className="cart-info-container">
+                <h3 className="cart-title">Cart</h3>
+                <div className="purchase-btn-container">
+                    <button className="cart-product-purchase-btn" onClick={handlePurchaseCart}>Place your order</button>
+                </div>
+            </div>
             <div className="products-in-cart-container">
                 {allProductsInCartList.map((product, i) => {
                     return(

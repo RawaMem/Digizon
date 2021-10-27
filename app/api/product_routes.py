@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Product, Media, Cart
+from app.models import db, Product, Media, Cart, User
 from flask_login import current_user
 from app.forms.new_product_form import NewProductForm
 from app.forms.edit_product_form import EditProductForm
@@ -192,7 +192,7 @@ def get_carts():
 @product_routes.route('/cart/<int:id>')
 def get_one_cart(id):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    print(CBLUEBG, 'get cart running', cart.to_dict(), CEND)
+    # print(CBLUEBG, 'get cart running', cart.to_dict(), CEND)
 
     return cart.to_dict()
 
@@ -213,7 +213,7 @@ def delete_product_from_cart(productId):
 # add product to cart
 @product_routes.route('/cart/add/<int:productId>/<int:quantity>', methods=['POST'])
 def add_new_product_to_cart(productId, quantity):
-    print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
+    # print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     product.quantity_in_cart = quantity
@@ -237,3 +237,41 @@ def edit_quantity_of_product(productId, quantity):
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     # db.session.add(cart)
     return cart.to_dict()
+
+
+# purchase products from cart
+@product_routes.route('/cart/purchase')
+def purchase_products_from_cart():
+    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    work_cart = cart.to_dict()
+    user = User.query.filter(User.id == current_user.id).first()
+    new_user_balance = 0
+    for product in work_cart['products']:
+        work_product = Product.query.filter(Product.id == product['id']).first()
+        seller = User.query.filter(User.id == product['user_id']).first()
+        print(CBLUEBG, 'cart during purchase before balance', (user.balance - work_product.quantity_in_cart * work_product.price), CEND)
+        seller.balance = (seller.balance + (work_product.quantity_in_cart * work_product.price))
+        new_user_balance -= (work_product.quantity_in_cart * work_product.price)
+        print(CBLUEBG, 'cart during purchase after balance', new_user_balance, CEND)
+        db.session.add(seller)
+        cart.products.remove(work_product)
+        work_product.stock_quantity -= work_product.quantity_in_cart
+        work_product.quantity_in_cart = 0
+        db.session.add(work_product)
+    print(CBLUEBG, 'cart during purchase before adding new balance', user.balance, CEND)
+    user.balance += new_user_balance
+    print(CBLUEBG, 'cart during purchase after adding new balance', user.balance, CEND)
+    db.session.add(user)
+    db.session.commit()
+    return cart.to_dict()
+
+
+
+
+    # product = Product.query.filter(Product.id == productId).first()
+    # cart.products.remove(product)
+    # product.quantity_in_cart = 0
+    # db.session.add(product)
+    # db.session.add(cart)
+    # db.session.commit()
+    # return cart.to_dict()
