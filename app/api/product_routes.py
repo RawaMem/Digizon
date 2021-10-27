@@ -249,18 +249,18 @@ def purchase_products_from_cart():
     for product in work_cart['products']:
         work_product = Product.query.filter(Product.id == product['id']).first()
         seller = User.query.filter(User.id == product['user_id']).first()
-        print(CBLUEBG, 'cart during purchase before balance', (user.balance - work_product.quantity_in_cart * work_product.price), CEND)
+        # print(CBLUEBG, 'cart during purchase before balance', (user.balance - work_product.quantity_in_cart * work_product.price), CEND)
         seller.balance = (seller.balance + (work_product.quantity_in_cart * work_product.price))
         new_user_balance -= (work_product.quantity_in_cart * work_product.price)
-        print(CBLUEBG, 'cart during purchase after balance', new_user_balance, CEND)
+        # print(CBLUEBG, 'cart during purchase after balance', new_user_balance, CEND)
         db.session.add(seller)
         cart.products.remove(work_product)
         work_product.stock_quantity -= work_product.quantity_in_cart
         work_product.quantity_in_cart = 0
         db.session.add(work_product)
-    print(CBLUEBG, 'cart during purchase before adding new balance', user.balance, CEND)
+    # print(CBLUEBG, 'cart during purchase before adding new balance', user.balance, CEND)
     user.balance += new_user_balance
-    print(CBLUEBG, 'cart during purchase after adding new balance', user.balance, CEND)
+    # print(CBLUEBG, 'cart during purchase after adding new balance', user.balance, CEND)
     db.session.add(user)
     db.session.commit()
     return cart.to_dict()
