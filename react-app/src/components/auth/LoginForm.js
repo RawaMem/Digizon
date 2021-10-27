@@ -26,6 +26,11 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  const handleDemo = () => {
+    setEmail('demo@aa.io');
+    setPassword('password');
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -57,6 +62,8 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button className='user-login-btn' type="submit" onClick={handleDemo}>Demo User</button>
+
       </div>
     </form>
   );
