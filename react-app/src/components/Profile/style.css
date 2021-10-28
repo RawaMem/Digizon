@@ -1,0 +1,144 @@
+.profile-page-container {
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-page-content-container {
+    width: 80vw;
+}
+
+
+.user-listed-products {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.sell-product-btn {
+    background-color: teal;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+    margin: 10px 0px;
+}
+
+.product-delete-btn {
+    background-color: teal;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+}
+
+.sell-product-btn:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.product-delete-btn:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.profile-product-card {
+    height: 350px;
+    width: 250px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    transition: 0.2s;
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.profile-product-name {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: teal;
+
+}
+
+.profile-product-name:hover {
+    color: rgb(4, 90, 90);
+}
+
+.profile-product-img-container {
+    height: 150px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.profile-product-img {
+    height: 150px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.profile-product-img:hover {
+    opacity: 0.95;
+}
+
+.modal-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 26px;
+    border-radius: 4px;
+    border: 1px solid rgb(17, 17, 17);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.create-product-container {
+    display: flex;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-btn {
+    background-color: teal;
+    height: 34px;
+    width: 312px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid teal;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+
+.modal-close-button {
+    background-color: teal;
+    height: 34px;
+    width: 312px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid teal;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modal-close-button:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.modal-btn:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
