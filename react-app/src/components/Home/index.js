@@ -31,6 +31,7 @@ export const Home = () => {
 
         <div className="home-page-container">
             <div className="home-page-content-container">
+                <h2 className="all-products-title">All Products</h2>
             {/* {allProductsObj && ( */}
                 <>
                     <div className="all-products">
@@ -41,9 +42,9 @@ export const Home = () => {
                                         <div className="product-img-container">
                                             <img src={product?.cover_img_url} alt="" className="product-img" />
                                         </div>
-                                        <p className="product-name product-card-detail-text">{product?.name}</p>
+                                        <p className="product-name product-card-detail-text profile-product-name">{product?.name}</p>
                                     <div className="product-card-detail-text">
-                                        <p className="product-description">{product?.description}</p>
+                                        {/* <p className="product-description">{product?.description}</p> */}
                                         <p className="product-price">${product?.price}</p>
                                         <p className="product-stock">In Stock: {product?.stock_quantity}</p>
                                     </div>

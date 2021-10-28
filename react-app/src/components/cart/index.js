@@ -99,7 +99,7 @@ export const Cart = () => {
                                 <Link className='product-cart-card-link' to={`/products/${product?.id}`}>
                                     <p className="cart-page-product-name">{product?.name}</p>
                                 </Link>
-                                <p className="product-description">{product?.description}</p>
+                                {/* <p className="product-description">{product?.description}</p> */}
                             </div>
                             <div className="product-cart-edit-container">
                                 <CartEdit product={product} />

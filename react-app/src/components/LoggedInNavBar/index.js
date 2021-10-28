@@ -30,27 +30,29 @@ export default function LoggedInNav() {
 
     return(
         <div className="navbar-container">
-            <div className="left-container">
-                <Link to='/' exact={true}>
-                    <button className="navbar-btn home-btn">Home</button>
-                </Link>
-            </div>
-            {/* <div className="searchbar-container">
-                <input type="text" className="search-bar" placeholder='Search'/>
-                <button className="search-btn">Search</button>
-            </div> */}
-            <div className="right-container">
-                <Link to={`/profile/${user?.id}`} exact={true}>
-                    <button className="navbar-btn btn-margin-right">Profile</button>
-                </Link>
-                <div className="cart-container">
-                    <Link className='product-cart-link' to={`/cart`}>
-                        <img src="https://www.pinclipart.com/picdir/big/485-4857762_png-file-svg-transparent-shopping-cart-icon-clipart.png" alt="" className="cart-img cart-margin-right" />
-                        <p className="cart-number btn-margin-right">{numberOfProductsInCart}</p>
+            <div className="navbar-content-container">
+                <div className="left-container">
+                    <Link to='/' exact={true}>
+                        <button className="navbar-btn home-btn">All Products</button>
                     </Link>
-                    <p className="user-balance btn-margin-right">Your Balance: {user?.balance}</p>
+                    <Link to={`/profile/${user?.id}`} exact={true}>
+                        <button className="navbar-btn btn-margin-right">Your Products</button>
+                    </Link>
                 </div>
-                <LogoutButton />
+                {/* <div className="searchbar-container">
+                    <input type="text" className="search-bar" placeholder='Search'/>
+                    <button className="search-btn">Search</button>
+                </div> */}
+                <div className="right-container">
+                    <div className="cart-container">
+                        <Link className='product-cart-link' to={`/cart`}>
+                            <img src="https://www.pinclipart.com/picdir/big/485-4857762_png-file-svg-transparent-shopping-cart-icon-clipart.png" alt="" className="cart-img cart-margin-right" />
+                            <p className="cart-number btn-margin-right">{numberOfProductsInCart}</p>
+                        </Link>
+                        <p className="user-balance btn-margin-right">Your Balance: ${user?.balance}</p>
+                    </div>
+                    <LogoutButton />
+                </div>
             </div>
         </div>
     )
