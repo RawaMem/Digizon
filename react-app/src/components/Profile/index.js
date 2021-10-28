@@ -15,6 +15,8 @@ export const Profile = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [stock_quantity, setStock_quantity] = useState('');
+    const [errors, setErrors] = useState([]);
+
     // const [image, setImage] = useState([]);
     // const [image2, setImage2] = useState('');
     // const [image3, setImage3] = useState('');
@@ -55,8 +57,18 @@ export const Profile = () => {
             // image2,
             // image3
         };
-        dispatch(createProduct(payload))
-        setModalIsOpen(false)
+        const data = await dispatch(createProduct(payload))
+        if (data) {
+            setErrors(data);
+          } else {
+              setModalIsOpen(false)
+              setName('')
+              setCover_img_url('')
+              setDescription('')
+              setPrice('')
+              setStock_quantity('')
+              setErrors([])
+          }
     }
 
     const handleDelete = async(e) => {
@@ -67,6 +79,8 @@ export const Profile = () => {
 
 
     return (
+        <>
+        <div className="whole-page-wrapper">
         <div className='profile-page-container'>
             <div className="profile-page-content-container">
                 <div className="create-product-btn-container">
@@ -76,6 +90,11 @@ export const Profile = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="create-product-container">
                                 <div className="input-container">
+                                    <div>
+                                        {errors.map((error, ind) => (
+                                            <div className='validation-error-list' key={ind}>{error}</div>
+                                        ))}
+                                    </div>
                                     <input
                                     type="text"
                                     placeholder="Product Name"
@@ -179,5 +198,20 @@ export const Profile = () => {
                 </div>
             </div>
         </div>
+        </div>
+        <div className="footer-wrapper">
+          <div className="footer-container">
+            <p className="about-me"> Designed by Rawaha Memon</p>
+            <div className="personal-link-container">
+              <a href="https://github.com/RawaMem" target="_blank" rel="noreferrer" className="social-link">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
+              </a>
+              <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank"  rel="noreferrer" className="social-link">
+                <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
+              </a>
+            </div>
+          </div>
+        </div>
+        </>
     )
 }

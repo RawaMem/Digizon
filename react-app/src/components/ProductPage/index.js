@@ -37,6 +37,8 @@ export const ProductPage = () => {
     const [price, setPrice] = useState(product?.price);
     const [stock_quantity, setStock_quantity] = useState(product?.stock_quantity);
     const [addQuantity, setAddQuantity] = useState(1);
+    const [errors, setErrors] = useState([]);
+
 
     const allProductsInCartList = Object.values(cart)
     let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
@@ -114,17 +116,25 @@ export const ProductPage = () => {
             // image2,
             // image3
         };
-        dispatch(editProductDetails(payload))
-        setModalIsOpen(false)
+        const data = await dispatch(editProductDetails(payload))
+        console.log('===========@@@@@@====this is data>', data)
+        if (data) {
+            setErrors(data);
+          } else {
+              setModalIsOpen(false)
+              setErrors([])
+          }
     }
 
-    const deleteThisReview = (e) => {
-        e.preventDefault();
-        dispatch(deleteReviewThunk(e.target.value));
-    }
+    // const deleteThisReview = (e) => {
+    //     e.preventDefault();
+    //     dispatch(deleteReviewThunk(e.target.value));
+    // }
 
 
     return (
+        <>
+        <div className="whole-page-wrapper">
         <div className="product-page-container">
             <div className="product-page-content-container">
 
@@ -184,6 +194,11 @@ export const ProductPage = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="create-product-container">
                                     <div className="input-container">
+                                        <div>
+                                            {errors.map((error, ind) => (
+                                                <div className='validation-error-list' key={ind}>{error}</div>
+                                            ))}
+                                        </div>
                                         <input
                                         type="text"
                                         placeholder="Product Name"
@@ -284,5 +299,20 @@ export const ProductPage = () => {
                 {/* )} */}
             </div>
         </div>
+        </div>
+        <div className="footer-wrapper">
+          <div className="footer-container">
+            <p className="about-me"> Designed by Rawaha Memon</p>
+            <div className="personal-link-container">
+              <a href="https://github.com/RawaMem" target="_blank" rel="noreferrer" className="social-link">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
+              </a>
+              <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank"  rel="noreferrer" className="social-link">
+                <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
+              </a>
+            </div>
+          </div>
+        </div>
+        </>
     )
 }

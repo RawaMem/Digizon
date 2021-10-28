@@ -5,10 +5,11 @@
     background-color: turquoise;
     width: 100vw;
     height: auto;
-    margin: 0;
+    margin: 0px;
     border: none;
     box-sizing: border-box;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    /* top: 0%; */
 
 
 }

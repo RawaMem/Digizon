@@ -111,7 +111,14 @@ export const createProduct = productDetails => async (dispatch) => {
     if (response.ok) {
         const newProductObj = await response.json();
         dispatch(addProduct(newProductObj))
-        return newProductObj
+        return null;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
     }
 }
 
@@ -129,7 +136,14 @@ export const editProductDetails = productDetails => async (dispatch) => {
     if (response.ok) {
         const edittedProductObj = await response.json()
         dispatch(editProduct(edittedProductObj))
-        return edittedProductObj
+        return null;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
     }
 }
 

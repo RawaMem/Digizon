@@ -37,7 +37,8 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="white-space-wrapper">
+    <>
+    <div className="whole-page-wrapper">
       <div className="login-page-container">
         <img src="https://cdn.discordapp.com/attachments/899805199613448233/903212248716173332/Digizon_2.png" alt="" className="main-logo" />
         {/* <h1 className="digizon-login-logo">Digizon</h1> */}
@@ -46,7 +47,7 @@ const LoginForm = () => {
             <h2 className="signin-text">Log-In</h2>
             <div>
               {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
+                <div className='validation-error-list' key={ind}>{error}</div>
               ))}
             </div>
             <div>
@@ -92,7 +93,9 @@ const LoginForm = () => {
             <button className="btn-to-signup">Create your Digizon Account</button>
           </Link>
         </div>
-        <div className="fotter-wrapper">
+      </div>
+    </div>
+        <div className="footer-wrapper">
           <div className="footer-container">
             <p className="about-me"> Designed by Rawaha Memon</p>
             <div className="personal-link-container">
@@ -105,8 +108,7 @@ const LoginForm = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </>
 
   );
 };

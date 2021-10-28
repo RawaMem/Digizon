@@ -1,3 +1,26 @@
+<br />
+<p align="center">
+  <a href="https://digizon.herokuapp.com/login">
+    <img src="https://cdn.discordapp.com/attachments/899805199613448233/903212248716173332/Digizon_2.png" alt="Logo" style="width:150px">
+  </a>
+
+  <h3 align="center">Digizon</h3>
+   <p align="center">
+   Digizon is an E Commerce website where you can buy and sell products. Keep track of of your inventory and Your profits and losses to stay organzied! Invite yoru friends and basically print money for free!
+
+
+[Checkout the Docs!](https://github.com/RawaMem/Digizon/wiki)
+</p>
+</p>
+
+
+
+
+
+
+
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.

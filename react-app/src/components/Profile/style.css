@@ -2,17 +2,25 @@
     box-sizing: border-box;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .profile-page-content-container {
     width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
 
 .user-listed-products {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    width: 80vw;
 
 }
 
@@ -106,6 +114,8 @@
 .input-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-btn {
@@ -142,4 +152,8 @@
 
 .modal-btn:hover {
     box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.validation-error-list {
+    color: teal;
 }
