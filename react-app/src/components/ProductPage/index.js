@@ -7,7 +7,7 @@ import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, edi
 import { getCartDetails, addProductToCartThunk } from '../../store/cart'
 import { Modal } from '../Modal';
 import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
-// import './index.css'
+import './style.css'
 
 
 export const ProductPage = () => {
@@ -126,151 +126,163 @@ export const ProductPage = () => {
 
     return (
         <div className="product-page-container">
+            <div className="product-page-content-container">
 
             <>
-            <div className="product-page-navbar">
+            {/* <div className="product-page-navbar">
                 <div className="logo-container">
 
                 </div>
                 <div className="searchbar-container">
 
                 </div>
-                {/* <div className="cart-container">
+                <div className="cart-container">
                     <Link className='product-cart-link' to={`/cart`}>
                         <p className="cart">Cart: {numberOfProductsInCart}</p>
                     </Link>
-                </div> */}
-
-            </div>
-            <h1 className="product-name">{product?.name}</h1>
-            <img src={product?.cover_img_url} alt="" className="product-img" />
-            <p className="product-description">{product?.description}</p>
-            <p className="product-price">${product?.price}</p>
-            {/* <p className="product-average-score">Average review score: {aveRating}</p> */}
-            <p className="product-stock">In Stock: {product?.stock_quantity}</p>
-
-            {cart[productId] === undefined ?
-            <form onSubmit={handleAddToCart}>
-                <div className="add-to-cart-container">
-                    <select value={addQuantity} onChange={(e) => setAddQuantity(e.target.value)}>
-                        {stockQuantity?.map(quantity => {
-                            return (
-                                <option value={quantity}>{quantity}</option>
-                            )
-                        })}
-                    </select>
-                    <button type='submit' className="add-to-cart-submit">Add To Cart</button>
-
                 </div>
-            </form> :
-            <div className="amount-already-in-cart-container">
-                <Link className='product-cart-link' to={`/cart`}>
-                    <p className="already-in-cart">This item is already in your cart</p>
-                </Link>
-            </div>}
 
+            </div> */}
+                <h1 className="product-page-name">{product?.name}</h1>
+                <img src={product?.cover_img_url} alt="" className="product-page-img" />
+                <p className="product-description">{product?.description}</p>
+                <p className="product-price">${product?.price}</p>
+                {/* <p className="product-average-score">Average review score: {aveRating}</p> */}
+                {product?.stock_quantity > 0 ?
+                <p className="product-stock">In Stock: {product?.stock_quantity}</p> :
+                <p className="out-of-stock">This product is out of stock</p>
+                }
 
+                {cart[productId] === undefined ?
+                <>{product?.stock_quantity > 0 ?
 
-            {product?.user_id === user?.id && (
-                <>
-                    <button onClick={() => setModalIsOpen(true)}>Edit Product</button>
-                    <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
-                        <form onSubmit={handleSubmit}>
-                            <div className="create-product-container">
-                                <div className="input-container">
-                                    <input
-                                    type="text"
-                                    placeholder="Product Name"
-                                    required
-                                    value={name}
-                                    onChange={e => setName(e.target.value)}
-                                    />
-                                    <input
-                                    type="textarea"
-                                    placeholder="Description"
-                                    required
-                                    value={description}
-                                    onChange={e => setDescription(e.target.value)}
-                                    />
-                                    <input
-                                    type="input"
-                                    placeholder="Cover Image URL"
-                                    required
-                                    value={cover_img_url}
-                                    onChange={e => setCover_img_url(e.target.value)}
-                                    />
-                                    <input
-                                    type="number"
-                                    placeholder="Price"
-                                    required
-                                    value={price}
-                                    onChange={e => setPrice(e.target.value)}
-                                    />
-                                    <input
-                                    type="number"
-                                    placeholder="Stock Quantity"
-                                    required
-                                    value={stock_quantity}
-                                    onChange={e => setStock_quantity(e.target.value)}
-                                    />
-                                    {/* <label for="image1">Main Image</label>
-                                    <input
-                                    type="file"
-                                    id='image1'
-                                    placeholder="Main Image"
-                                    required
-                                    value={image}
-                                    onChange={e => setImage(image.push(e.target.value))}
-                                    />
-                                    <label for="image2">1st Optional Image</label>
-                                    <input
-                                    type="file"
-                                    id='image2'
-                                    placeholder="1st Optional Image"
-                                    value={image}
-                                    onChange={e => setImage(image.push(e.target.value))}
-                                    />
-                                    <label for="image1">2nd Optional Image</label>
-                                    <input
-                                    type="file"
-                                    id='image3'
-                                    placeholder="2nd Optional Image"
-                                    value={image}
-                                    onChange={e => setImage(image.push(e.target.value))}
-                                    /> */}
-                                    <button type="submit" onClick={handleSubmit}>Edit Product</button>
-                                </div>
-                            </div>
-                        </form>
-                    </Modal>
-                </>
-                )}
-                {/* <div className="review-container">
-                    {allReviewsList.map(review => {
-                            return (
-                                +review?.product_id === +product?.id ? (
-                                    <>
-                                    <div className="r-container">
-                                        <div className="review-username"><p>{review?.username}</p></div>
-                                        <div className="rating"><p>Rating: <span className='review-rating-number'>{review.rating}</span></p></div>
-                                        <div className="content"><p>{review.content}</p></div>
-                                        {userId && userId === review?.user_id &&
-                                        // (<Link to={`/businesses/${businessId}/reviews/${review?.id}/edit`}>
-                                        <button value={review.id} className="review-edit-btn">Edit</button>
-                                        // </Link>)
-                                        }
-                                        {userId && userId === review?.user_id &&
-                                        (<button value={review.id} className="review-delete-btn" onClick={deleteThisReview}>Delete</button>)
-                                        }
-                                    </div>
-                                </>
-                                ) : false
+                <form onSubmit={handleAddToCart}>
+                    <div className="add-to-cart-container">
+                        <select className='drop-down' value={addQuantity} onChange={(e) => setAddQuantity(e.target.value)}>
+                            {stockQuantity?.map(quantity => {
+                                return (
+                                    <option className='drop-down-option' value={quantity}>{quantity}</option>
                                 )
                             })}
+                        </select>
+                        <button type='submit' className="add-to-cart-submit edit-product-btn">Add To Cart</button>
 
-                </div> */}
-                </>
-            {/* )} */}
+                    </div>
+                </form> : false } </> :
+                <div className="amount-already-in-cart-container">
+                    <Link className='product-page-cart-link' to={`/cart`}>
+                        <p className="already-in-cart">This item is in your cart</p>
+                    </Link>
+                </div>}
+
+
+
+                {product?.user_id === user?.id && (
+                    <>
+                        <button className='edit-product-btn' onClick={() => setModalIsOpen(true)}>Edit Product</button>
+                        <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
+                            <form onSubmit={handleSubmit}>
+                                <div className="create-product-container">
+                                    <div className="input-container">
+                                        <input
+                                        type="text"
+                                        placeholder="Product Name"
+                                        className='login-input'
+                                        required
+                                        value={name}
+                                        onChange={e => setName(e.target.value)}
+                                        />
+                                        <input
+                                        type="textarea"
+                                        placeholder="Description"
+                                        className='login-input'
+                                        required
+                                        value={description}
+                                        onChange={e => setDescription(e.target.value)}
+                                        />
+                                        <input
+                                        type="input"
+                                        placeholder="Cover Image URL"
+                                        className='login-input'
+                                        required
+                                        value={cover_img_url}
+                                        onChange={e => setCover_img_url(e.target.value)}
+                                        />
+                                        <input
+                                        type="number"
+                                        placeholder="Price"
+                                        className='login-input'
+                                        required
+                                        value={price}
+                                        onChange={e => setPrice(e.target.value)}
+                                        />
+                                        <input
+                                        type="number"
+                                        placeholder="Stock Quantity"
+                                        className='login-input'
+                                        required
+                                        value={stock_quantity}
+                                        onChange={e => setStock_quantity(e.target.value)}
+                                        />
+                                        {/* <label for="image1">Main Image</label>
+                                        <input
+                                        type="file"
+                                        id='image1'
+                                        placeholder="Main Image"
+                                        required
+                                        value={image}
+                                        onChange={e => setImage(image.push(e.target.value))}
+                                        />
+                                        <label for="image2">1st Optional Image</label>
+                                        <input
+                                        type="file"
+                                        id='image2'
+                                        placeholder="1st Optional Image"
+                                        value={image}
+                                        onChange={e => setImage(image.push(e.target.value))}
+                                        />
+                                        <label for="image1">2nd Optional Image</label>
+                                        <input
+                                        type="file"
+                                        id='image3'
+                                        placeholder="2nd Optional Image"
+                                        value={image}
+                                        onChange={e => setImage(image.push(e.target.value))}
+                                        /> */}
+                                        <button type="submit" className='modal-btn' onClick={handleSubmit}>Edit Product</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </Modal>
+                    </>
+                    )}
+                    {/* <div className="review-container">
+                        {allReviewsList.map(review => {
+                                return (
+                                    +review?.product_id === +product?.id ? (
+                                        <>
+                                        <div className="r-container">
+                                            <div className="review-username"><p>{review?.username}</p></div>
+                                            <div className="rating"><p>Rating: <span className='review-rating-number'>{review.rating}</span></p></div>
+                                            <div className="content"><p>{review.content}</p></div>
+                                            {userId && userId === review?.user_id &&
+                                            // (<Link to={`/businesses/${businessId}/reviews/${review?.id}/edit`}>
+                                            <button value={review.id} className="review-edit-btn">Edit</button>
+                                            // </Link>)
+                                            }
+                                            {userId && userId === review?.user_id &&
+                                            (<button value={review.id} className="review-delete-btn" onClick={deleteThisReview}>Delete</button>)
+                                            }
+                                        </div>
+                                    </>
+                                    ) : false
+                                    )
+                                })}
+
+                    </div> */}
+                    </>
+                {/* )} */}
+            </div>
         </div>
     )
 }
