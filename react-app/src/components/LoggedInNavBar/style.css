@@ -39,7 +39,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .product-cart-link {
@@ -47,7 +46,6 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-
 }
 
 
@@ -58,6 +56,10 @@
     color: white;
     padding: 5px 5px;
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+
+
 }
 
 .cart-number {
@@ -70,6 +72,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+
+}
+
+.navbar-btn:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.cart-number:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
 }
 
 .user-balance {
