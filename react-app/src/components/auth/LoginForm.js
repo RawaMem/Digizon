@@ -92,17 +92,17 @@ const LoginForm = () => {
             <button className="btn-to-signup">Create your Digizon Account</button>
           </Link>
         </div>
-      </div>
-      <div className="fotter-wrapper">
-        <div className="footer-container">
-          <p className="about-me"> Designed by Rawaha Memon</p>
-          <div className="personal-link-container">
-            <a href="https://github.com/RawaMem" target="_blank" rel="noreferrer" className="social-link">
-              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
-            </a>
-            <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank"  rel="noreferrer" className="social-link">
-              <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
-            </a>
+        <div className="fotter-wrapper">
+          <div className="footer-container">
+            <p className="about-me"> Designed by Rawaha Memon</p>
+            <div className="personal-link-container">
+              <a href="https://github.com/RawaMem" target="_blank" rel="noreferrer" className="social-link">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
+              </a>
+              <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank"  rel="noreferrer" className="social-link">
+                <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
