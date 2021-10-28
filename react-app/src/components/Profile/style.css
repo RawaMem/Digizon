@@ -87,6 +87,7 @@
 }
 
 .modal-style {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;

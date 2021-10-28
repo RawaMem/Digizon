@@ -70,6 +70,7 @@ export const Profile = () => {
         <div className='profile-page-container'>
             <div className="profile-page-content-container">
                 <div className="create-product-btn-container">
+                    <h2 className="profile-title">Your Products for Sale</h2>
                     <button className='sell-product-btn' onClick={() => setModalIsOpen(true)}>Add Product To Sell</button>
                     <Modal openModal={modalIsOpen} closeModal={() => setModalIsOpen(false)}>
                         <form onSubmit={handleSubmit}>
@@ -85,7 +86,7 @@ export const Profile = () => {
                                     />
                                     <input
                                     type="text"
-                                    placeholder="Cover Image URL"
+                                    placeholder="Product Image URL"
                                     className='login-input'
                                     required
                                     value={cover_img_url}

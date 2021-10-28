@@ -1,0 +1,75 @@
+.product-page-container {
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.product-page-content-container {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-page-cart-link {
+    text-decoration: none;
+    color: teal;
+
+}
+
+.product-page-cart-link:hover {
+    color: rgb(4, 90, 90);
+}
+
+.product-page-name {
+    color: teal;
+}
+
+.product-page-img {
+    border-radius: 5px;
+    max-height: 600px;
+    max-width: 900px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+.edit-product-btn {
+    background-color: teal;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+    max-width: 150px;
+}
+
+.edit-product-btn:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+.drop-down {
+    margin-right: 30px;
+    padding: 4px;
+    background-color: teal;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.drop-down:hover {
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.3), 0 7px 22px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.drop-down-option {
+    background-color: teal;
+}
+
+.profile-title {
+    color: teal;
+}

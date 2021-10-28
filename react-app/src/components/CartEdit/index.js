@@ -50,7 +50,7 @@ export const CartEdit = ({product}) => {
         <div className="product-cart-edit--component-container">
             <form onSubmit={handleEditQuantity}>
                 <div className="edit-quantity-container">
-                    <select value={edittedQuantity} onChange={(e) => setEdittedQuantity(e.target.value)}>
+                    <select className='drop-down-edit' value={edittedQuantity} onChange={(e) => setEdittedQuantity(e.target.value)}>
                         {stockQuantity?.map(quantity => {
                             return (
                                 <option value={quantity}>{quantity}</option>

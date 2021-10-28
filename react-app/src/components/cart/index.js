@@ -22,6 +22,11 @@ export const Cart = () => {
         return accum + ele.quantity_in_cart
     }, 0)
 
+
+    let totalPurchasePrice = allProductsInCartList?.reduce((accum, ele) => {
+        return accum + (ele.quantity_in_cart * ele.price)
+    }, 0)
+
     // const [edittedQuantity, setEdittedQuantity] = useState();
 
 
@@ -68,10 +73,17 @@ export const Cart = () => {
     return(
 
         <div className="cart-page-container">
+            <div className="cart-page-content-container">
             <div className="cart-info-container">
-                <h3 className="cart-title">Cart</h3>
+                <h2 className="cart-page-title">Cart</h2>
                 <div className="purchase-btn-container">
-                    <button className="cart-product-purchase-btn" onClick={handlePurchaseCart}>Place your order</button>
+                    <p className="total-price">Total Price: ${totalPurchasePrice}</p>
+                    <button className="cart-product-purchase-btn navbar-btn" onClick={handlePurchaseCart}>Place your order</button>
+                </div>
+                <div className="empty-cart-notification">
+                    {totalPurchasePrice === 0 && (
+                        <h2 className="empty-cart-text">Your cart is empty</h2>
+                    )}
                 </div>
             </div>
             <div className="products-in-cart-container">
@@ -85,7 +97,7 @@ export const Cart = () => {
                             </div>
                             <div className="product-cart-description">
                                 <Link className='product-cart-card-link' to={`/products/${product?.id}`}>
-                                    <p className="product-name">{product?.name}</p>
+                                    <p className="cart-page-product-name">{product?.name}</p>
                                 </Link>
                                 <p className="product-description">{product?.description}</p>
                             </div>
@@ -106,12 +118,13 @@ export const Cart = () => {
                                 </form> */}
                             </div>
                             <div className="delete-btn-container">
-                                <button className="cart-product-delete-btn" id={product?.id} onClick={handleRemoveFromCart}>Remove Product</button>
+                                <button className="cart-product-delete-btn navbar-btn" id={product?.id} onClick={handleRemoveFromCart}>Remove Product</button>
                             </div>
                         </div>
                     )
                 })}
 
+            </div>
             </div>
         </div>
     )
