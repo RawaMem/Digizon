@@ -54,7 +54,8 @@ const SignUpForm = () => {
 
   return (
     <div className="login-page-container">
-      <h1 className="digizon-login-logo">Digizon</h1>
+      <img src="https://cdn.discordapp.com/attachments/899805199613448233/903212248716173332/Digizon_2.png" alt="" className="main-logo" />
+      {/* <h1 className="digizon-login-logo">Digizon</h1> */}
       <div className="login-form-container">
       <form onSubmit={onSignUp}>
         <h2 className="signin-text">Sign-Up</h2>
@@ -73,6 +74,7 @@ const SignUpForm = () => {
             name='first_name'
             placeholder='First Name'
             onChange={updateFirst_name}
+            required
             value={first_name}
           ></input>
         </div>
@@ -86,6 +88,7 @@ const SignUpForm = () => {
             name='last_name'
             placeholder='Last Name'
             onChange={updateLast_name}
+            required
             value={last_name}
           ></input>
         </div>
@@ -99,6 +102,7 @@ const SignUpForm = () => {
             name='username'
             placeholder='Username'
             onChange={updateUsername}
+            required
             value={username}
           ></input>
         </div>
@@ -112,6 +116,7 @@ const SignUpForm = () => {
             name='email'
             placeholder='Email'
             onChange={updateEmail}
+            required
             value={email}
           ></input>
         </div>
@@ -125,6 +130,7 @@ const SignUpForm = () => {
             name='password'
             placeholder='Password'
             onChange={updatePassword}
+            required
             value={password}
           ></input>
         </div>
@@ -138,6 +144,7 @@ const SignUpForm = () => {
             name='repeat_password'
             placeholder='Repeat Password to Confirm'
             onChange={updateRepeatPassword}
+            required
             value={repeatPassword}
             required={true}
           ></input>

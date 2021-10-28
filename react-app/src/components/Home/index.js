@@ -46,7 +46,11 @@ export const Home = () => {
                                     <div className="product-card-detail-text">
                                         {/* <p className="product-description">{product?.description}</p> */}
                                         <p className="product-price">${product?.price}</p>
-                                        <p className="product-stock">In Stock: {product?.stock_quantity}</p>
+                                        {product?.stock_quantity > 0 ?
+                                        <p className="product-stock">In Stock: {product?.stock_quantity}</p> :
+                                        <p className="out-of-stock">This product is out of stock</p>
+                                        }
+                                        {/* <p className="product-stock">In Stock: {product?.stock_quantity}</p> */}
                                     </div>
                                 </div>
                                 </Link>

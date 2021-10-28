@@ -55,9 +55,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
+    /* height: auto; */
     width: 100vw;
     border-top: 1px solid grey;
+    background-color: turquoise;
+    bottom: 0px;
+    margin-bottom:0;
+    background: hsl(174, 72%, 56%);
+
 }
 
 
@@ -92,6 +97,12 @@
     color: #666;
     font-size: 15px;
     margin-bottom: 10px;
+}
+
+.main-logo {
+    height: 125px;
+    width: 125px;
+    object-fit: cover;
 }
 
 
