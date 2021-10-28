@@ -58,11 +58,10 @@
     /* height: auto; */
     width: 100vw;
     border-top: 1px solid grey;
-    background-color: turquoise;
+    /* background-color: turquoise; */
     bottom: 0px;
     margin-bottom:0;
-    background: hsl(174, 72%, 56%);
-
+    /* background: hsl(174, 72%, 56%); */
 }
 
 
@@ -81,7 +80,7 @@
 .social-link-img {
     height: 30px;
     width: 30px;
-    margin: 25px;
+    margin: 5px;
 }
 
 .line {
@@ -105,3 +104,25 @@
     object-fit: cover;
 }
 
+.validation-error-list {
+    color: teal;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+
+}
+
+.footer-wrapper {
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* height: 40vh; */
+    grid-area: footer;
+    height: 100%;
+}
+
+.footer-container {
+    height: 100%;
+
+}
+
+.whole-page-wrapper {
+    grid-area: body;
+}

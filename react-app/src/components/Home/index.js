@@ -28,6 +28,8 @@ export const Home = () => {
 
 
     return (
+        <>
+        <div className="whole-page-wrapper">
 
         <div className="home-page-container">
             <div className="home-page-content-container">
@@ -61,6 +63,21 @@ export const Home = () => {
             {/* )} */}
             </div>
         </div>
+        </div>
+        <div className="footer-wrapper">
+          <div className="footer-container">
+            <p className="about-me"> Designed by Rawaha Memon</p>
+            <div className="personal-link-container">
+              <a href="https://github.com/RawaMem" target="_blank" rel="noreferrer" className="social-link">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-1024.png" alt="" className="social-link-img" />
+              </a>
+              <a href="https://linkedin.com/in/rawaha-m-b280a4204 " target="_blank"  rel="noreferrer" className="social-link">
+                <img src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/linkedin-1024.png" alt="" className="social-link-img" />
+              </a>
+            </div>
+          </div>
+        </div>
+        </>
 
 
     )

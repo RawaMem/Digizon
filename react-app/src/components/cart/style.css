@@ -114,3 +114,22 @@
     color: teal;
     font-weight: 500;
 }
+
+.footer-wrapper {
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* height: 40vh; */
+    grid-area: footer;
+    height: 100%;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+
+}
+
+.footer-container {
+    height: 100%;
+
+}
+
+.whole-page-wrapper {
+    grid-area: body;
+}

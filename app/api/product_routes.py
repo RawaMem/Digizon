@@ -8,6 +8,14 @@ from app.colors import CBLUEBG, CEND
 
 product_routes = Blueprint('products', __name__, url_prefix='/products')
 
+def validation_errors_to_error_messages(validation_errors):
+
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 
 # get all products for a user
 @product_routes.route('/')
@@ -52,8 +60,8 @@ def add_new_product():
 
         db.session.commit()
         return new_product.to_dict()
-    else:
-        return form.errors
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 
@@ -84,9 +92,8 @@ def edit_product(id):
         # db.session.add(new_media)
         # db.session.commit()
         return product.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-    else:
-        return form.errors
 
 
 
