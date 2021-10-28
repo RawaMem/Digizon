@@ -30,27 +30,31 @@ export const Home = () => {
     return (
 
         <div className="home-page-container">
+            <div className="home-page-content-container">
             {/* {allProductsObj && ( */}
                 <>
                     <div className="all-products">
                         {allProductsList?.map(product => {
                             return (
+                                <Link className='product-card-link' to={`/products/${product?.id}`}>
                                 <div className="product-card">
-                                    <Link className='product-card-link' to={`/products/${product?.id}`}>
                                         <div className="product-img-container">
                                             <img src={product?.cover_img_url} alt="" className="product-img" />
                                         </div>
-                                        <p className="product-name">{product?.name}</p>
-                                    </Link>
-                                    <p className="product-description">{product?.description}</p>
-                                    <p className="product-price">${product?.price}</p>
-                                    <p className="product-stock">In Stock: {product?.stock_quantity}</p>
+                                        <p className="product-name product-card-detail-text">{product?.name}</p>
+                                    <div className="product-card-detail-text">
+                                        <p className="product-description">{product?.description}</p>
+                                        <p className="product-price">${product?.price}</p>
+                                        <p className="product-stock">In Stock: {product?.stock_quantity}</p>
+                                    </div>
                                 </div>
+                                </Link>
                             )
                         })}
                     </div>
                 </>
             {/* )} */}
+            </div>
         </div>
 
 
