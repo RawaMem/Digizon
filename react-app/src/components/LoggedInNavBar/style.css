@@ -85,15 +85,18 @@
 
 .user-balance {
     color: black;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .home-btn {
-    margin-left: 40px;
-}
-
-.right-container {
+    /* margin-left: 40px; */
     margin-right: 30px;
 }
+
+/* .right-container {
+    margin-right: 30px;
+} */
 
 .btn-margin-right {
     margin-right: 30px;
@@ -101,4 +104,12 @@
 
 .cart-margin-right {
     margin-right: 5px;
+}
+
+.navbar-content-container {
+    display: flex;
+    width: 80vw;
+
+
+
 }

@@ -16,7 +16,7 @@
 .all-products {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 
@@ -59,4 +59,8 @@
 
 .product-card-detail-text {
     margin-left: 10px;
+}
+
+.all-products-title {
+    color: teal;
 }
