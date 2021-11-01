@@ -99,7 +99,7 @@ export const getProductDetails = (id) => async(dispatch) => {
 
 
 export const createProduct = productDetails => async (dispatch) => {
-    console.log('===========@@@@@@>thunk', productDetails)
+    // console.log('===========@@@@@@>thunk', productDetails)
 
     const response = await fetch('/api/products/new', {
         method: 'POST',
@@ -149,7 +149,7 @@ export const editProductDetails = productDetails => async (dispatch) => {
 
 
 export const deleteOneProduct = id => async (dispatch) => {
-    console.log('===========@@@@@=======> edit running', id)
+    // console.log('===========@@@@@=======> edit running', id)
 
     const response = await fetch(`/api/products/delete/${id}`)
     if (response.ok) {

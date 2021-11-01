@@ -9,11 +9,11 @@ export const CartEdit = ({product}) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const allProductsObj = useSelector(state => state?.products)
-    const allProductsList = Object.values(allProductsObj)
-    const cart = useSelector(state => state?.cart)
+    // const allProductsObj = useSelector(state => state?.products)
+    // const allProductsList = Object.values(allProductsObj)
+    // const cart = useSelector(state => state?.cart)
 
-    const allProductsInCartList = Object.values(cart)
+    // const allProductsInCartList = Object.values(cart)
 
     const [edittedQuantity, setEdittedQuantity] = useState(product.quantity_in_cart);
 

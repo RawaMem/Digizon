@@ -56,7 +56,7 @@ export const getAllMedias = () => async (dispatch) => {
 
 export const getMediaDetails = (product_id) => async(dispatch) => {
     const response = await fetch(`/api/medias/${product_id}`)
-    console.log('get media thunk running ========', response)
+    // console.log('get media thunk running ========', response)
     if (response.ok) {
         let mediaDetailsObj = await response.json()
         dispatch(mediaDetails(mediaDetailsObj))

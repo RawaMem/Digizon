@@ -1,9 +1,9 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteProductFromCartThunk, getCartDetails, purchaseProductsFromCartThunk } from '../../store/cart';
-import { getAllProducts, getProductDetails } from '../../store/products';
+import { getAllProducts } from '../../store/products';
 import { refreshUserThunk } from '../../store/session';
 import { CartEdit } from '../CartEdit';
 import './style.css'
@@ -13,14 +13,14 @@ export const Cart = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
-    const allProductsObj = useSelector(state => state?.products)
-    const allProductsList = Object.values(allProductsObj)
+    // const allProductsObj = useSelector(state => state?.products)
+    // const allProductsList = Object.values(allProductsObj)
     const cart = useSelector(state => state?.cart)
 
     const allProductsInCartList = Object.values(cart)
-    let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
-        return accum + ele.quantity_in_cart
-    }, 0)
+    // let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
+    //     return accum + ele.quantity_in_cart
+    // }, 0)
 
 
     let totalPurchasePrice = allProductsInCartList?.reduce((accum, ele) => {
@@ -44,7 +44,7 @@ export const Cart = () => {
     })
 
     const handleRemoveFromCart = async(e) => {
-        console.log('===========@@@@@@==>', e.target.id)
+        // console.log('===========@@@@@@==>', e.target.id)
         e.preventDefault();
         const payload = {
             productId: e.target.id
@@ -56,7 +56,7 @@ export const Cart = () => {
 
     const handlePurchaseCart = async(e) => {
         e.preventDefault();
-        console.log('===========@@@@@@==> purchase component function running')
+        // console.log('===========@@@@@@==> purchase component function running')
         dispatch(purchaseProductsFromCartThunk())
         dispatch(refreshUserThunk())
     }

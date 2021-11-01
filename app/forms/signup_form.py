@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, Length, ValidationError
+from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from app.models import User
 
 
@@ -25,4 +25,5 @@ class SignUpForm(FlaskForm):
     last_name = StringField('last_name', validators=[DataRequired(message='Field cannot be empty'), Length(min=1, max=100, message='Last name must be between 2 and 100 characters')])
     username = StringField('username', validators=[DataRequired(message='Field cannot be empty'), Length(min=3, max=40, message='User name must be between 3 and 40 characters'), username_exists])
     email = StringField('email', validators=[DataRequired(message='Field cannot be empty'), Length(min=5, max=255, message='Email must be between 5 and 255 characters'), user_exists])
-    password = StringField('password', validators=[DataRequired(message='Field cannot be empty')])
+    password = StringField('password', validators=[DataRequired(message='Field cannot be empty'), EqualTo('repeat_password', message='Passwords must match')])
+    repeat_password = StringField('repeat_password', validators=[DataRequired(message='Field cannot be empty')])

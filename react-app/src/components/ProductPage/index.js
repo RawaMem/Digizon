@@ -2,11 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getAllMedias, getMediaDetails } from '../../store/medias';
-import { createProduct, getAllProducts, deleteOneProduct, getProductDetails, editProductDetails} from '../../store/products';
+// import { getAllMedias, getMediaDetails } from '../../store/medias';
+import { getAllProducts, getProductDetails, editProductDetails} from '../../store/products';
 import { getCartDetails, addProductToCartThunk } from '../../store/cart'
 import { Modal } from '../Modal';
-import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
+import { getAllReviewsThunk } from '../../store/reviews';
 import './style.css'
 
 
@@ -21,13 +21,13 @@ export const ProductPage = () => {
     const allProductsObj = useSelector(state => state?.products)
     const allReviewsObj = useSelector(state => state?.reviews)
     const allReviewsList = Object.values(allReviewsObj)
-    const userId = user?.id
+    // const userId = user?.id
 
 
     const product = allProductsObj[productId]
 
-    const medias = useSelector(state => state?.medias)
-    const allMediasList = Object.values(medias)
+    // const medias = useSelector(state => state?.medias)
+    // const allMediasList = Object.values(medias)
     let productsInCartList = []
 
 
@@ -40,14 +40,14 @@ export const ProductPage = () => {
     const [errors, setErrors] = useState([]);
 
 
-    const allProductsInCartList = Object.values(cart)
-    let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
-        return accum + ele.quantity_in_cart
-    }, 0)
+    // const allProductsInCartList = Object.values(cart)
+    // let numberOfProductsInCart = allProductsInCartList.reduce((accum, ele) => {
+    //     return accum + ele.quantity_in_cart
+    // }, 0)
 
     let reviewSum = 0;
     allReviewsList?.forEach(review => {
-        console.log('==========@@@@@===>', review.product_id === productId)
+        // console.log('==========@@@@@===>', review.product_id === productId)
         if (review?.product_id === productId) {
             reviewSum = reviewSum + review?.rating
     }});
@@ -117,7 +117,7 @@ export const ProductPage = () => {
             // image3
         };
         const data = await dispatch(editProductDetails(payload))
-        console.log('===========@@@@@@====this is data>', data)
+        // console.log('===========@@@@@@====this is data>', data)
         if (data) {
             setErrors(data);
           } else {
@@ -169,9 +169,9 @@ export const ProductPage = () => {
                 <form onSubmit={handleAddToCart}>
                     <div className="add-to-cart-container">
                         <select className='drop-down' value={addQuantity} onChange={(e) => setAddQuantity(e.target.value)}>
-                            {stockQuantity?.map(quantity => {
+                            {stockQuantity?.map((quantity, ind) => {
                                 return (
-                                    <option className='drop-down-option' value={quantity}>{quantity}</option>
+                                    <option key={ind} className='drop-down-option' value={quantity}>{quantity}</option>
                                 )
                             })}
                         </select>

@@ -21,7 +21,7 @@ const removeUser = () => ({
 const initialState = { user: null };
 
 export const refreshUserThunk = () => async (dispatch) => {
-  console.log('==========@@@@@@===> user refresh thunk running')
+  // console.log('==========@@@@@@===> user refresh thunk running')
   const response = await fetch("/api/auth/refresh");
   if (response.ok) {
     const data = await response.json();
@@ -85,7 +85,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp =
-  (first_name, last_name, username, email, password) => async (dispatch) => {
+  (first_name, last_name, username, email, password, repeatPassword) => async (dispatch) => {
     const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
@@ -97,6 +97,7 @@ export const signUp =
         username,
         email,
         password,
+        'repeat_password': repeatPassword
       }),
     });
 

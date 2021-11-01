@@ -19,7 +19,7 @@ export default function LoggedInNav() {
         return accum + ele.quantity_in_cart
     }, 0)
 
-    const userBalance = user?.balance
+    // const userBalance = user?.balance
 
     useEffect(() => {
         dispatch(refreshUserThunk())

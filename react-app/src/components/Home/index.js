@@ -1,7 +1,7 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllProducts } from '../../store/products';
 import './index.css'
 
@@ -37,20 +37,20 @@ export const Home = () => {
             {/* {allProductsObj && ( */}
                 <>
                     <div className="all-products">
-                        {allProductsList?.map(product => {
+                        {allProductsList?.map((product, ind) => {
                             return (
-                                <Link className='product-card-link' to={`/products/${product?.id}`}>
-                                <div className="product-card">
-                                        <div className="product-img-container">
-                                            <img src={product?.cover_img_url} alt="" className="product-img" />
+                                <Link key={ind + 'a'} className='product-card-link' to={`/products/${product?.id}`}>
+                                <div key={ind + 'b'} className="product-card">
+                                        <div key={ind + 'c'} className="product-img-container">
+                                            <img src={product?.cover_img_url} alt="" key={ind + ''} className="product-img" />
                                         </div>
-                                        <p className="product-name product-card-detail-text profile-product-name">{product?.name}</p>
-                                    <div className="product-card-detail-text">
-                                        {/* <p className="product-description">{product?.description}</p> */}
-                                        <p className="product-price">${product?.price}</p>
+                                        <p key={ind + 'd'} className="product-name product-card-detail-text profile-product-name">{product?.name}</p>
+                                    <div key={ind + 'e'} className="product-card-detail-text">
+                                        {/* <p key={ind + 'f'} className="product-description">{product?.description}</p> */}
+                                        <p key={ind + 'g'} className="product-price">${product?.price}</p>
                                         {product?.stock_quantity > 0 ?
-                                        <p className="product-stock">In Stock: {product?.stock_quantity}</p> :
-                                        <p className="out-of-stock">This product is out of stock</p>
+                                        <p key={ind + 'h'} className="product-stock">In Stock: {product?.stock_quantity}</p> :
+                                        <p key={ind + 'i'} className="out-of-stock">This product is out of stock</p>
                                         }
                                         {/* <p className="product-stock">In Stock: {product?.stock_quantity}</p> */}
                                     </div>

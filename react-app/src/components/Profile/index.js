@@ -25,7 +25,7 @@ export const Profile = () => {
     const user = useSelector(state => state?.session?.user)
     const allProductsObj = useSelector(state => state?.products)
     const allProductsList = Object.values(allProductsObj)
-    const medias = useSelector(state => state?.medias)
+    // const medias = useSelector(state => state?.medias)
 
 
     useEffect(() => {
@@ -38,10 +38,10 @@ export const Profile = () => {
 
 
 
-    const displayMainImage = (product) => {
-        const productMedia = product?.medias[0]
-        return productMedia?.url
-    }
+    // const displayMainImage = (product) => {
+    //     const productMedia = product?.medias[0]
+    //     return productMedia?.url
+    // }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -72,7 +72,7 @@ export const Profile = () => {
     }
 
     const handleDelete = async(e) => {
-        console.log('===========@@@@@@>', e.target.value)
+        // console.log('===========@@@@@@>', e.target.value)
         // e.preventDefault();
         dispatch(deleteOneProduct(e.target.value))
     }
