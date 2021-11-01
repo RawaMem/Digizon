@@ -6,153 +6,41 @@
 
   <h3 align="center">Digizon</h3>
    <p align="center">
-   Digizon is an E Commerce website where you can buy and sell products. Keep track of of your inventory and Your profits and losses to stay organzied! Invite yoru friends and basically print money for free!
 
-
-[Checkout the Docs!](https://github.com/RawaMem/Digizon/wiki)
+  [Checkout the Docs!](https://github.com/RawaMem/Digizon/wiki)
 </p>
 </p>
 
+**Table of Contents**
+* [Digizon Overview](#digizon-overview)
+* [Technologies Used](#technologies-used)
+* [Frontend Overview](#frontend-overview)
+* [Backend Overview](#backend-overview)
+* [Future plans](#future-plans)
+
+## Digizon Overview
+Digizon is a fullstack application that allows users to buy and sell products. Keep track of your products, inventory, and your account balance to stay organzied! Invite yoru friends and basically print money for free!
+
+## Technologies Used
+Digizon uses [Python](https://www.python.org/) on the backend with [Flask](https://flask.palletsprojects.com/en/2.0.x/), [SQLAlchemy](https://www.sqlalchemy.org/), and a [Postgresql](https://www.postgresql.org/) database.
+On the front end, Digizon is using [Javascript](https://www.javascript.com/) with [React](https://reactjs.org/) and [Redux](https://redux.js.org/). Through React and Redux, the front end requests product data from the backend.
+SQLAlchemy and Flask process this request and return data to the front end to be stored in Redux and displayed with React
+
+## Frontend Overview
+The frontend consists of React and Redux. Users will log in and then have access to their account. The main page consists of all products on the site.\
+<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546598497972244/Screen_Shot_2021-10-31_at_6.45.09_PM.png" width='600'>
 
 
+The user product page displays all the products they have posted for sale. Each product includes useful information such as a picture of the product, name, description, price, and inventory. Users can add, delete, and edit products they have for sale. The user can find their account balance on the top right of their screen.\
+<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546713816150026/Screen_Shot_2021-10-31_at_6.45.38_PM.png" width='600'>
 
 
+If a user buys a product, the price is deducted from their balance. If another user buys their products, the price of the items they bought will be added to your user balance. Users can add multiple products to their cart and adjust the quatity that they want to purchase. On the cart page, they can see the total of their purchase, edit the quatity of products they want to purchase, remove products from their cart, and purchase the products in their cart. When the user presses purchase, their cart is emptied, their balance is updated, and the product inventories are changed according to the quantity of product bought.\
+<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546983170170920/Screen_Shot_2021-10-31_at_6.46.42_PM.png" width='600'>\
+
+## Backend Overview
+Flask and SQLAlchemy were used for this project because I wanted to gain more experience with Flask and SQLAlchemy, and because they were able to process the necessary requests. Products are added, editted, and deleted to the database in a standard manner. Products can be linked to user carts and the wuantity of each item and the product is kept track of. This way if a user logs out and then logs back in, the products in their cart are saved. Account balances are tied to a user and saved in the database. When a user makes a purchase, the purchase price is deducted from the buyer and added to the seller.\
 
 
-
-
-# Flask React Project
-
-This is the starter for the Flask React project.
-
-## Getting started
-
-1. Clone this repository (only this branch)
-
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-
-2. Install dependencies
-
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
-
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
-
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
-
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-# Digizon
+## Future Plans
+This project was a lot of fun to make and I have a lot of features that I would like to implement in the future. The first feature that is already in the works is product reviews and ratings. I want the user to be able to leave reviews and see how products are rated. the Rating will be based off of a 5 point system. I would like to incorporate AWS so that users can store multiple images and video clips of their products on AWS. I am planning to a map with the location fo the product and directions to the product for pick up using [Mapbox GL JS](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/). Mapbox has routing built in and the docs are very well done. Additional features I am plannign to add are order histories and product view histories. This will help users keep track of products they are interested in and help them keep track of products they have purchased. Last, but definitely not least, I want to make a help chat for users tfor any issues that arise. I will be making a Digizon representative account and use [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/) to allow users to chat witha  rep regarding any issues that may arise with products.
