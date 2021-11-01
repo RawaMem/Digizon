@@ -18,7 +18,7 @@ def get_medias():
 @media_routes.route('/<int:id>')
 def get_one_media(id):
     media = Media.query.filter(Media.product_id == id).first()
-    print(CBLUEBG, '===========================@@>', media, CEND)
+    # print(CBLUEBG, '===========================@@>', media, CEND)
     return media.to_dict()
 
 

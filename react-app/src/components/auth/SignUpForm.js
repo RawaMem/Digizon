@@ -16,12 +16,12 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(first_name, last_name, username, email, password));
+    // if (password === repeatPassword) {
+      const data = await dispatch(signUp(first_name, last_name, username, email, password, repeatPassword));
       if (data) {
         setErrors(data)
       }
-    }
+    // }
   };
 
   const updateFirst_name = (e) => {
@@ -64,7 +64,7 @@ const SignUpForm = () => {
           <h2 className="signin-text">Sign-Up</h2>
           <div>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div key={ind} className='validation-error-list'>{error}</div>
             ))}
           </div>
           <div>
