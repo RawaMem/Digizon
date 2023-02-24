@@ -219,7 +219,7 @@ def delete_product_from_cart(productId):
 # add product to cart
 @product_routes.route('/cart/add/<int:productId>/<int:quantity>', methods=['POST'])
 def add_new_product_to_cart(productId, quantity):
-    # print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
+    print(CBLUEBG, 'add product to cart', productId, quantity, CEND)
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     product = Product.query.filter(Product.id == productId).first()
     product.quantity_in_cart = quantity
