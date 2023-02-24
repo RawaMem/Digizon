@@ -1,4 +1,4 @@
-from app.models import db
+from app.models import db, environment, SCHEMA
 from app.models import product
 from app.models.product import Product
 from app.models.media import Media
@@ -29,5 +29,11 @@ def seed_products():
 
 
 def undo_products():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;"
+        )
+    else:
+        db.session.execute('TRUNCATE products RESTART IDENTITY CASCADE;')
+
     db.session.commit()

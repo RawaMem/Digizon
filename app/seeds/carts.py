@@ -1,4 +1,4 @@
-from app.models import db
+from app.models import db, environment, SCHEMA
 from app.models.cart import Cart
 
 
@@ -24,5 +24,11 @@ def seed_carts():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_carts():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.carts RESTART IDENTITY CASCADE;"
+        )
+    else:
+        db.session.execute('TRUNCATE carts RESTART IDENTITY CASCADE;')
+
     db.session.commit()

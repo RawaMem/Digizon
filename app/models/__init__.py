@@ -1,4 +1,5 @@
 from .db import db
+from .db import environment, SCHEMA
 from .user import User
 from .cart import Cart, products_carts
 from .media import Media
