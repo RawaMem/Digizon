@@ -7,6 +7,8 @@ products_carts = db.Table(
     db.Column("product_id", db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
     db.Column("cart_id", db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True)
 )
+if environment == "production":
+    products_carts.schema = SCHEMA
 
 
 

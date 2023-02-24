@@ -7,6 +7,9 @@ products_histories = db.Table(
     db.Column("product_id", db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
     db.Column("view_history_id", db.Integer, db.ForeignKey(add_prefix_for_prod("view_histories.id")), primary_key=True)
 )
+if environment == "production":
+    products_histories.schema = SCHEMA
+
 
 
 
