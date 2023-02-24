@@ -7,6 +7,10 @@ Create Date: 2021-10-20 12:38:24.202004
 """
 from alembic import op
 import sqlalchemy as sa
+import os
+
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
@@ -26,6 +30,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
+
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -34,6 +42,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -46,6 +58,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
+
     op.create_table('medias',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -57,6 +73,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE medias SET SCHEMA {SCHEMA};")
+
     op.create_table('products_carts',
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('cart_id', sa.Integer(), nullable=False),
@@ -64,6 +84,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('product_id', 'cart_id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE products_carts SET SCHEMA {SCHEMA};")
+
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -75,6 +99,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+
     op.create_table('saves',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -85,6 +113,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE saves SET SCHEMA {SCHEMA};")
+
     op.create_table('view_histories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -95,6 +127,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE view_histories SET SCHEMA {SCHEMA};")
+
     op.create_table('products_histories',
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('view_history_id', sa.Integer(), nullable=False),
@@ -102,11 +138,35 @@ def upgrade():
     sa.ForeignKeyConstraint(['view_history_id'], ['view_histories.id'], ),
     sa.PrimaryKeyConstraint('product_id', 'view_history_id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE products_histories SET SCHEMA {SCHEMA};")
+
     op.add_column('users', sa.Column('first_name', sa.String(length=100), nullable=False))
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.add_column('users', sa.Column('last_name', sa.String(length=100), nullable=False))
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.add_column('users', sa.Column('balance', sa.Integer(), nullable=True))
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.add_column('users', sa.Column('created_at', sa.DateTime(), nullable=False))
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.add_column('users', sa.Column('updated_at', sa.DateTime(), nullable=False))
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

@@ -1,13 +1,16 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class Review(db.Model):
     __tablename__ = 'reviews'
 
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     username = db.Column(db.String(40), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String(1000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())

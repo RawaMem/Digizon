@@ -1,20 +1,23 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 
 orders_products = db.Table(
     "orders_products",
-    db.Column("product_id", db.Integer, db.ForeignKey("products.id"), primary_key=True),
-    db.Column("order_id", db.Integer, db.ForeignKey("orders.id"), primary_key=True)
+    db.Column("product_id", db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
+    db.Column("order_id", db.Integer, db.ForeignKey(add_prefix_for_prod("orders.id")), primary_key=True)
 )
 
 
 class Order(db.Model):
     __tablename__ = 'orders'
 
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    # product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    # product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
     # quantity = db.Column(db.Integer(1000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
