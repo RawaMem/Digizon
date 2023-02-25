@@ -66,7 +66,7 @@ export const getCartDetails = (id) => async (dispatch) => {
 };
 
 export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
-  console.log('===========@@@@@=======> add to cart running', cartDetails)
+  // console.log('===========@@@@@=======> add to cart running', cartDetails)
   const response = await fetch(
     `/api/products/cart/add/${cartDetails.productId}/${cartDetails.quantity}`,
     {
@@ -85,10 +85,10 @@ export const addProductToCartThunk = (cartDetails) => async (dispatch) => {
     dispatch(addProductToCart(cartObj));
     return cartObj;
   } else {
-    console.log('===========@@@@@=======> this is response from database', response)
+    // console.log('===========@@@@@=======> this is response from database', response)
     const problem = await response.json();
 
-    console.log('===========@@@@@=======> this is jsoned problem', problem)
+    // console.log('===========@@@@@=======> this is jsoned problem', problem)
   }
 };
 
