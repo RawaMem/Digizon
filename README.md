@@ -15,7 +15,6 @@
 * [Technologies Used](#technologies-used)
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
-* [Future plans](#future-plans)
 
 ## Digizon Overview
 Digizon is a fullstack application that allows users to buy and sell products. Keep track of your products, inventory, and your account balance to stay organzied! Invite your friends and basically print free money!
@@ -27,15 +26,10 @@ SQLAlchemy and Flask process this request and return data to the front end to be
 
 ## Frontend Overview
 The frontend consists of React and Redux. Users will log in and then have access to their account. The main page consists of all products on the site.\
-<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546598497972244/Screen_Shot_2021-10-31_at_6.45.09_PM.png" width='600'>
-
 
 The user product page displays all the products they have posted for sale. Each product includes useful information such as a picture of the product, name, description, price, and inventory. Users can add, delete, and edit products they have for sale. The user can find their account balance on the top right of their screen.\
-<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546713816150026/Screen_Shot_2021-10-31_at_6.45.38_PM.png" width='600'>
-
 
 If a user buys a product, the price is deducted from their balance. If another user buys their products, the price of the items they bought will be added to your user balance. Users can add multiple products to their cart and adjust the quantity that they want to purchase. On the cart page, they can see the total of their purchase, edit the quantity of products they want to purchase, remove products from their cart, and purchase the products in their cart. When the user clicks place your order, their cart is emptied, their balance is updated, and the product inventories are changed according to the quantity of product bought.\
-<img src="https://cdn.discordapp.com/attachments/899805199613448233/904546983170170920/Screen_Shot_2021-10-31_at_6.46.42_PM.png" width='600'>
 
 ## Backend Overview
 Flask and SQLAlchemy were used for this project because I wanted to gain more experience with Flask and SQLAlchemy, and because they were able to process the necessary requests. Products are added, editted, and deleted to the database in a standard manner. Products can be linked to user carts and the quantity of each item and the product is kept track of. This way if a user logs out and then logs back in, the products in their cart are saved. Account balances are tied to a user and saved in the database. When a user makes a purchase, the purchase price is deducted from the buyer and added to the seller.
