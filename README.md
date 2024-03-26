@@ -7,7 +7,6 @@
   <h3 align="center">Digizon</h3>
    <p align="center">
 
-  [Checkout the Docs!](https://github.com/RawaMem/Digizon/wiki)
 </p>
 </p>
 
