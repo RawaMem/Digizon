@@ -1,8 +1,5 @@
 <br />
 <p align="center">
-  <a href="https://digizon.herokuapp.com/login">
-    <img src="https://cdn.discordapp.com/attachments/899805199613448233/903212248716173332/Digizon_2.png" alt="Logo" style="width:150px">
-  </a>
 
   <h3 align="center">Digizon</h3>
    <p align="center">
